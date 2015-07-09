@@ -2,9 +2,140 @@
 
 (require racket/contract
          racket/match
+         racket/list
          racket/pretty
          
          gonz/gui-helpers)
+
+(define edit-mode (make-parameter #f))
+
+(define movable-button%
+  (class button%
+
+    (define/override
+      (on-subwindow-event receiver event)
+      
+      (cond
+        [(and (edit-mode)
+              (equal? (send event get-event-type)
+                      'left-down)
+              (send event get-control-down))
+         (move-left-in-container (parent-of receiver))]
+        [(and (edit-mode)
+              (equal? (send event get-event-type)
+                      'right-down)
+              (send event get-control-down))
+         (move-right-in-container (parent-of receiver))]
+        [(and (edit-mode)
+              (equal? (send event get-event-type)
+                      'left-down))
+         (move-left-in-container receiver)]
+        [(and (edit-mode)
+              (equal? (send event get-event-type)
+                      'right-down))
+         (move-right-in-container receiver)]
+        [else #f]))
+
+    (super-new)))
+
+(define movable-message%
+  (class message%
+
+    (define/override
+      (on-subwindow-event receiver event)
+      
+      (printf "Event ~a @ ~a~n"
+              (send event get-event-type)
+              receiver)
+
+      (cond
+        [(and (edit-mode)
+              (equal? (send event get-event-type)
+                      'left-down)
+              (send event get-control-down))
+         (move-left-in-container (parent-of receiver))]
+        [(and (edit-mode)
+              (equal? (send event get-event-type)
+                      'right-down)
+              (send event get-control-down))
+         (move-right-in-container (parent-of receiver))]
+        [(and (edit-mode)
+              (equal? (send event get-event-type)
+                      'left-down))
+         (move-left-in-container receiver)]
+        [(and (edit-mode)
+              (equal? (send event get-event-type)
+                      'right-down))
+         (move-right-in-container receiver)]
+        [else #f]))
+
+    (super-new)))
+
+(define (parent-of element)
+  (send element get-parent))
+(define (children-of parent)
+  (send parent get-children))
+
+(define (new-children parent children)
+  (send parent
+        change-children
+        (lambda (c)
+          children)))
+
+(define (move-left-in-container e
+                                #:compare [comp eqv?])
+  (new-children (parent-of e)
+                (move-left e (children-of (parent-of e)))))
+
+(define (move-right-in-container e
+                                #:compare [comp eqv?])
+  (new-children (parent-of e)
+                (move-right e (children-of (parent-of e)))))
+
+(define (move-left i lst
+                   #:compare [comp eqv?])
+
+  (define (found-item? item)
+    (comp item i))
+
+  (match lst
+    [(list (? found-item? found)
+           after ...)
+     lst]
+    [(list before ... prev
+           (? found-item? found))
+     (append before
+             (list found prev))]
+    [(list before ... prev
+           (? found-item? found)
+           next
+           after ...)
+     (append before
+             (list found prev next)
+             after)]))
+
+(define (move-right i lst
+                    #:compare [comp eqv?])
+
+  (define (found-item? item)
+    (equal? item i))
+
+  (match lst
+    [(list (? found-item? found)
+           next
+           after ...)
+     (append (list next found)
+             after)]
+    [(list before ...
+           (? found-item? found))
+     lst]
+    [(list before ... prev
+           (? found-item? found)
+           next
+           after ...)
+     (append before
+             (list prev next found)
+             after)]))
 
 (define (make-components blob-components top-frame)
 
@@ -15,20 +146,20 @@
     (define (make-component c)
 
       (define (make-callback p #:clear [clear? #f])
+        
         (lambda (b e)
-          (if clear?
-            (printf "Reading from after clear: ~a~n" p)
-            (printf "Reading from: ~a~n" p))))
+          (printf "Reading from path: ~a~n" p)))
 
       (match c
-        [(list 'label content) (new message% [parent rpanel] [label content])]
+        [(list 'label content)
+         (new movable-message% [parent rpanel] [label content])]
         [(list 'button text path)
-         (new button%
+         (new movable-button%
               [parent rpanel]
               [label text]
               [callback (make-callback path)])]
         [(list 'button text path 'clear)
-         (new button%
+         (new movable-button%
               [parent rpanel]
               [label text]
               [callback (make-callback path #:clear #t)])]))
@@ -65,22 +196,24 @@
   (define top-frame (new frame% [label "WindowSpecTest"]
                          [alignment '(center top)]))
 
+  (btn edit-mode-switch top-frame "Edit-mode"
+       (lambda (b e)
+         (edit-mode (not (edit-mode)))))
+
   (btn other-load top-frame "Load other"
        (lambda (b e)
-         (load-components component-panel "other.blob")
-         (pretty-print (view-children top-frame))
-         ))
+         (load-components component-panel "other.blob")))
   
   (btn orig-load top-frame "Load orig."
        (lambda (b e)
-         (load-components component-panel "components.blob")
-         (pretty-print (view-children top-frame))
-         ))
+         (load-components component-panel "components.blob")))
 
   (vpanel component-panel top-frame
           [alignment '(center top)])
   
   (send top-frame show #t))
 
+
 (module+ main
-  (main-window))
+  (main-window)
+  )
