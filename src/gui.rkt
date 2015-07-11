@@ -1,26 +1,28 @@
 #lang racket/gui
 
 (require racket/pretty
-		 gonz/gui-helpers
+         gonz/gui-helpers
          "movable-button.rkt"
          "movable-horizontal-panel.rkt"
          "parameters.rkt"
          "loader.rkt")
 
 (define (main-window)
-  (define top-frame (new frame% [label "Invoker 2.0 [2015-07-XX]"]
-                         [alignment '(center top)]))
+  (define top-frame (new auto-save-frame%
+                         [label "Invoker 2.0 [2015-07-XX]"]
+                         [alignment '(center top)]
+                         [auto-save-callback save-components]))
 
   (define (components [frame top-frame])
-	(serialize-object (car (reverse (view-children frame)))))
+    (serialize-object (car (reverse (view-children frame)))))
 
   (define (save-components [frame top-frame]
-						   [filename "components.blob"])
-	(write-components-to-file (components) 
-							  filename))
+                           [filename "components.blob"])
+    (write-components-to-file (components) 
+                              filename))
 
   (define (print-components [frame top-frame])
-	(pretty-print (components)))
+    (pretty-print (components)))
 
   (btn edit-mode-switch top-frame "Edit-mode"
        (lambda (b e)
@@ -58,7 +60,7 @@
       ([exn:fail:object?
          (lambda (exn)
            #f)])
-    (send o get-children)))
+      (send o get-children)))
 
   (define children (children-of object))
   (if children

@@ -4,7 +4,7 @@
 (require racket/contract
          racket/match
          racket/list
-         
+
 
          "parent-manipulation.rkt"
          "parameters.rkt"
@@ -80,10 +80,10 @@
 
   ;(pretty-print blob-components)
   (match blob-components
-	[(list 'column rows ...)
-	 (for-each row->components rows)]
-	[(list rows ...)
-	 (for-each row->components rows)]))
+    [(list 'column rows ...)
+     (for-each row->components rows)]
+    [(list rows ...)
+     (for-each row->components rows)]))
 
 (provide load-components)
 (define (load-components top-frame [filename "components.blob"])
