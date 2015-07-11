@@ -30,7 +30,8 @@
                          [style (window-style)]))
 
   (define built-in-panel (new horizontal-panel%
-                              [parent top-frame]))
+                              [parent top-frame]
+                              [alignment '(center top)]))
 
   (btn edit-mode-switch built-in-panel "Edit-mode"
        (lambda (b e)
