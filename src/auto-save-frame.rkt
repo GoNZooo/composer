@@ -8,7 +8,7 @@
 
     (define/augment
       (on-close)
-      
+
       (auto-save-callback))
 
     (super-new)))

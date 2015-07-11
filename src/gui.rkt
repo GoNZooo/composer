@@ -4,12 +4,12 @@
          gonz/gui-helpers
          "movable-button.rkt"
          "movable-horizontal-panel.rkt"
-		 "auto-save-frame.rkt"
+         "auto-save-frame.rkt"
          "parameters.rkt"
          "loader.rkt")
 
 (define (main-window)
-  
+
   (define (components [frame top-frame])
     (serialize-object (car (reverse (view-children frame)))))
 

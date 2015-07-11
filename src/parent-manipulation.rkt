@@ -27,7 +27,7 @@
 
 (provide move-right-in-container)
 (define (move-right-in-container e
-                                #:compare [comp eqv?])
+                                 #:compare [comp eqv?])
   (new-children (parent-of e)
                 (move-right e (children-of (parent-of e)))))
 
