@@ -1,7 +1,6 @@
 #lang racket/gui
 
-(require racket/pretty
-         gonz/gui-helpers
+(require gonz/gui-helpers
          "movable-button.rkt"
          "movable-horizontal-panel.rkt"
          "auto-save-frame.rkt"
@@ -17,37 +16,32 @@
                            [filename "components.blob"])
     (write-components-to-file (components) 
                               filename))
+  
+  (define (print-components [frame top-frame])
+    (pretty-print (components)))
+
   (define top-frame (new auto-save-frame%
                          [label "Invoker 2.0 [2015-07-XX]"]
                          [alignment '(center top)]
                          [auto-save-callback save-components]))
 
+  (define built-in-panel (new horizontal-panel%
+                              [parent top-frame]))
 
-  (define (print-components [frame top-frame])
-    (pretty-print (components)))
-
-  (btn edit-mode-switch top-frame "Edit-mode"
+  (btn edit-mode-switch built-in-panel "Edit-mode"
        (lambda (b e)
          (edit-mode (not (edit-mode)))))
 
-  (btn clear-clipboard top-frame "Clear clipboard"
+  (btn clear-clipboard built-in-panel "Clear clipboard"
        (lambda (b e)
          (send the-clipboard
                set-clipboard-string
                ""
                (send e get-time-stamp))))
 
-  (btn iconize-window top-frame "Iconize window"
+  (btn iconize-window built-in-panel "Iconize window"
        (lambda (b e)
-         (send top-frame iconize #t)))
-
-  (btn show-children top-frame "Children"
-       (lambda (b e)
-         (print-components)))
-
-  (btn write-components-button top-frame "Write components"
-       (lambda (b e)
-         (save-components)))
+         (send built-in-panel iconize #t)))
 
   (vpanel component-panel top-frame
           [alignment '(center top)])
