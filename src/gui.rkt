@@ -10,6 +10,13 @@
   (define top-frame (new frame% [label "Invoker 2.0 [2015-07-XX]"]
                          [alignment '(center top)]))
 
+  (define (save-current-components [frame top-frame]
+                                   [filename "components.blob"])
+    (write-components-to-file
+      (serialize-object
+        (car (reverse (view-children top-frame))))
+      filename))
+
   (btn edit-mode-switch top-frame "Edit-mode"
        (lambda (b e)
          (edit-mode (not (edit-mode)))))
@@ -28,6 +35,10 @@
   (btn show-children top-frame "Children"
        (lambda (b e)
          (view-children top-frame)))
+
+  (btn write-components-button top-frame "Write components"
+       (lambda (b e)
+         (save-current-components)))
 
   (vpanel component-panel top-frame
           [alignment '(center top)])
@@ -91,10 +102,12 @@
     filename
     (lambda (output-port)
       (write (serialize-object components)))
-    #:exists 'replace)
+    #:exists 'replace))
+
 
 (module+ main
   (require racket/pretty)
   (define top-frame (main-window))
 
-  (pretty-print (serialize-object (car (reverse (view-children top-frame))))))
+  (pretty-print (serialize-object (car (reverse (view-children
+                                                  top-frame))))))
