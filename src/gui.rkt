@@ -27,7 +27,7 @@
                          [label "Invoker 2.0 [2015-07-XX]"]
                          [alignment '(center top)]
                          [auto-save-callback save-components]
-                         [style '(float)]))
+                         [style (window-style)]))
 
   (define built-in-panel (new horizontal-panel%
                               [parent top-frame]))
