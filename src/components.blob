@@ -2,8 +2,8 @@
    (label "Misc"))
  (row
    (button "Button 1" "content" clear)
-   (button "Страхотно" "content" clear)
-   (button "Отлично" "content" clear)
+   (button "Страхотно" "Страхотно..." clear)
+   (button "Отлично" "Отлично!")
    (button "Button 2" "other content"))
  (row (label "Other?") (label "duno..."))
  (row (button "HejHopp" "murg"))
