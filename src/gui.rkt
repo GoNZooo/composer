@@ -1,7 +1,7 @@
 #lang racket/gui
 
 (require racket/pretty
-         
+
          gonz/gui-helpers
 
          "movable-button.rkt"
@@ -19,7 +19,7 @@
                            [filename "components.blob"])
     (write-components-to-file (components) 
                               filename))
-  
+
   (define (print-components [frame top-frame])
     (pretty-print (components)))
 
