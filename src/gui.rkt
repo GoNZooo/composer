@@ -1,6 +1,7 @@
 #lang racket/gui
 
-(require gonz/gui-helpers
+(require racket/pretty
+		 gonz/gui-helpers
          "movable-button.rkt"
          "movable-horizontal-panel.rkt"
          "parameters.rkt"
@@ -10,12 +11,16 @@
   (define top-frame (new frame% [label "Invoker 2.0 [2015-07-XX]"]
                          [alignment '(center top)]))
 
-  (define (save-current-components [frame top-frame]
-                                   [filename "components.blob"])
-    (write-components-to-file
-      (serialize-object
-        (car (reverse (view-children frame))))
-      filename))
+  (define (components [frame top-frame])
+	(serialize-object (car (reverse (view-children frame)))))
+
+  (define (save-components [frame top-frame]
+						   [filename "components.blob"])
+	(write-components-to-file (components) 
+							  filename))
+
+  (define (print-components [frame top-frame])
+	(pretty-print (components)))
 
   (btn edit-mode-switch top-frame "Edit-mode"
        (lambda (b e)
@@ -34,11 +39,11 @@
 
   (btn show-children top-frame "Children"
        (lambda (b e)
-         (view-children top-frame)))
+         (print-components)))
 
   (btn write-components-button top-frame "Write components"
        (lambda (b e)
-         (save-current-components)))
+         (save-components)))
 
   (vpanel component-panel top-frame
           [alignment '(center top)])
@@ -101,13 +106,11 @@
   (call-with-output-file
     filename
     (lambda (output-port)
-      (write (serialize-object components)))
+      (write components output-port))
     #:exists 'replace))
 
 
 (module+ main
   (require racket/pretty)
   (define top-frame (main-window))
-
-  (pretty-print (serialize-object (car (reverse (view-children
-                                                  top-frame))))))
+  )

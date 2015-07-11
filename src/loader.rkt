@@ -1,5 +1,6 @@
 #lang racket/gui
 
+(require racket/pretty)
 (require racket/contract
          racket/match
          racket/list
@@ -77,7 +78,12 @@
       [(list 'row components ...)
        (for-each make-component components)]))
 
-  (for-each row->components blob-components))
+  ;(pretty-print blob-components)
+  (match blob-components
+	[(list 'column rows ...)
+	 (for-each row->components rows)]
+	[(list rows ...)
+	 (for-each row->components rows)]))
 
 (provide load-components)
 (define (load-components top-frame [filename "components.blob"])
