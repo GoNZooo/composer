@@ -14,7 +14,7 @@
                                    [filename "components.blob"])
     (write-components-to-file
       (serialize-object
-        (car (reverse (view-children top-frame))))
+        (car (reverse (view-children frame))))
       filename))
 
   (btn edit-mode-switch top-frame "Edit-mode"
