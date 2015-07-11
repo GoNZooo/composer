@@ -5,8 +5,7 @@
 (provide window-style)
 (define window-style (make-parameter '()))
 
-(when (or (equal? (system-type 'os)
-                  'windows)
-          (equal? (system-type 'os)
-                  'macosx))
-  (window-style '(float)))
+(case (system-type 'os)
+  [(windows macosx)
+   (window-style '(float))])
+
