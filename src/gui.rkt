@@ -4,15 +4,12 @@
          gonz/gui-helpers
          "movable-button.rkt"
          "movable-horizontal-panel.rkt"
+		 "auto-save-frame.rkt"
          "parameters.rkt"
          "loader.rkt")
 
 (define (main-window)
-  (define top-frame (new auto-save-frame%
-                         [label "Invoker 2.0 [2015-07-XX]"]
-                         [alignment '(center top)]
-                         [auto-save-callback save-components]))
-
+  
   (define (components [frame top-frame])
     (serialize-object (car (reverse (view-children frame)))))
 
@@ -20,6 +17,11 @@
                            [filename "components.blob"])
     (write-components-to-file (components) 
                               filename))
+  (define top-frame (new auto-save-frame%
+                         [label "Invoker 2.0 [2015-07-XX]"]
+                         [alignment '(center top)]
+                         [auto-save-callback save-components]))
+
 
   (define (print-components [frame top-frame])
     (pretty-print (components)))

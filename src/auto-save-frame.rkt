@@ -6,7 +6,7 @@
 
     (init-field auto-save-callback)
 
-    (define/override
+    (define/augment
       (on-close)
       
       (auto-save-callback))
