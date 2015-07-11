@@ -9,4 +9,4 @@
                   'windows)
           (equal? (system-type 'os)
                   'macosx))
-  (style '(float)))
+  (window-style '(float)))
