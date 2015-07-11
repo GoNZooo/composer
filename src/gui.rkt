@@ -1,6 +1,8 @@
 #lang racket/gui
 
 (require gonz/gui-helpers
+         "movable-button.rkt"
+         "movable-horizontal-panel.rkt"
          "parameters.rkt"
          "loader.rkt")
 
@@ -23,21 +25,14 @@
        (lambda (b e)
          (send top-frame iconize #t)))
 
-  (btn other-load top-frame "Load other"
-       (lambda (b e)
-         (load-components component-panel "other.blob")))
-  
-  (btn orig-load top-frame "Load orig."
-       (lambda (b e)
-         (load-components component-panel "components.blob")))
-
   (btn show-children top-frame "Children"
        (lambda (b e)
          (view-children top-frame)))
 
   (vpanel component-panel top-frame
           [alignment '(center top)])
-  
+
+  (load-components component-panel "components.blob")
   (send top-frame show #t)
   top-frame)
 
@@ -54,8 +49,52 @@
     (cons object (map view-children children))
     object))
 
+(define (serialize-object object)
+  (define (is-button? o)
+    (is-a? o button%))
+  (define (is-column? o)
+    (is-a? o vertical-panel%))
+  (define (is-row? o)
+    (is-a? o movable-horizontal-panel%))
+  (define (is-label? o)
+    (is-a? o message%))
+
+  (define (get-symbol o)
+    (match o
+      [(? is-button? b)
+       'button]
+      [(? is-column? c)
+       'column]
+      [(? is-row? r)
+       'row]
+      [(? is-label? l)
+       'label]))
+
+  (define (get-parameters o)
+    (match o
+      [(? is-button? b)
+       `(,(send b get-label)
+          ,(send b get-template))]
+      [(? is-label? l)
+       `(,(send l get-label))]))
+
+  (match object
+    [(list parent children ...)
+     (cons (get-symbol parent)
+           (map serialize-object children))]
+    [child
+      (cons (get-symbol child)
+            (get-parameters child))]))
+
+(define (write-components-to-file components [filename "components.blob"])
+  (call-with-output-file
+    filename
+    (lambda (output-port)
+      (write (serialize-object components)))
+    #:exists 'replace)
+
 (module+ main
   (require racket/pretty)
   (define top-frame (main-window))
 
-  (pretty-print (view-children top-frame)))
+  (pretty-print (serialize-object (car (reverse (view-children top-frame))))))
