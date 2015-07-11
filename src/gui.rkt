@@ -30,8 +30,7 @@
                          [style (window-style)]))
 
   (define built-in-panel (new horizontal-panel%
-                              [parent top-frame]
-                              [alignment '(center top)]))
+                              [parent top-frame]))
 
   (btn edit-mode-switch built-in-panel "Edit-mode"
        (lambda (b e)
@@ -109,7 +108,7 @@
   (call-with-output-file
     filename
     (lambda (output-port)
-      (pretty-print components output-port))
+      (pretty-write components output-port))
     #:exists 'replace))
 
 
