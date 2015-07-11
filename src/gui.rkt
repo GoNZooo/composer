@@ -1,6 +1,9 @@
 #lang racket/gui
 
-(require gonz/gui-helpers
+(require racket/pretty
+         
+         gonz/gui-helpers
+
          "movable-button.rkt"
          "movable-horizontal-panel.rkt"
          "auto-save-frame.rkt"
@@ -105,11 +108,10 @@
   (call-with-output-file
     filename
     (lambda (output-port)
-      (write components output-port))
+      (pretty-print components output-port))
     #:exists 'replace))
 
 
 (module+ main
-  (require racket/pretty)
   (define top-frame (main-window))
   )
