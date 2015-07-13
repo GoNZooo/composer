@@ -31,6 +31,7 @@
   (new-children (parent-of e)
                 (move-right e (children-of (parent-of e)))))
 
+(provide move-left)
 (define (move-left i lst
                    #:compare [comp eqv?])
 
@@ -53,6 +54,7 @@
              (list found prev next)
              after)]))
 
+(provide move-right)
 (define (move-right i lst
                     #:compare [comp eqv?])
 

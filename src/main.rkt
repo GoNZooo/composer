@@ -4,29 +4,16 @@
 
          gonz/gui-helpers
 
-         "movable-button.rkt"
-         "movable-horizontal-panel.rkt"
-         "auto-save-frame.rkt"
          "parameters.rkt"
-         "loader.rkt")
+         "loader.rkt"
+         "gui/auto-save-frame.rkt")
 
 (define (main-window)
-
-  (define (components [frame top-frame])
-    (serialize-object (car (reverse (view-children frame)))))
-
-  (define (save-components [frame top-frame]
-                           [filename "components.blob"])
-    (write-components-to-file (components) 
-                              filename))
-
-  (define (print-components [frame top-frame])
-    (pretty-print (components)))
-
   (define top-frame (new auto-save-frame%
                          [label "Invoker 2.0 [2015-07-XX]"]
                          [alignment '(center top)]
-                         [auto-save-callback save-components]
+                         [auto-save-callback (lambda ()
+                                               #f)]
                          [style (window-style)]))
 
   (define built-in-panel (new horizontal-panel%
@@ -48,10 +35,22 @@
        (lambda (b e)
          (send built-in-panel iconize #t)))
 
-  (vpanel component-panel top-frame
-          [alignment '(center top)])
+  (define template-content-panel (make-components (call-with-input-file
+                                                    "components.blob"
+                                                    read)
+                                                  top-frame))
 
-  (load-components component-panel "components.blob")
+  (define (components)
+    (serialize-object template-content-panel))
+
+  (define (save-components [filename "components.blob"])
+    (write-components-to-file (components) 
+                              filename))
+  (send top-frame set-auto-save-callback save-components)
+
+  (define (print-components [frame top-frame])
+    (pretty-print (components)))
+
   (send top-frame show #t)
   top-frame)
 
@@ -69,41 +68,7 @@
     object))
 
 (define (serialize-object object)
-  (define (is-button? o)
-    (is-a? o button%))
-  (define (is-column? o)
-    (is-a? o vertical-panel%))
-  (define (is-row? o)
-    (is-a? o movable-horizontal-panel%))
-  (define (is-label? o)
-    (is-a? o message%))
-
-  (define (get-symbol o)
-    (match o
-      [(? is-button? b)
-       'button]
-      [(? is-column? c)
-       'column]
-      [(? is-row? r)
-       'row]
-      [(? is-label? l)
-       'label]))
-
-  (define (get-parameters o)
-    (match o
-      [(? is-button? b)
-       `(,(send b get-label)
-          ,(send b get-template))]
-      [(? is-label? l)
-       `(,(send l get-label))]))
-
-  (match object
-    [(list parent children ...)
-     (cons (get-symbol parent)
-           (map serialize-object children))]
-    [child
-      (cons (get-symbol child)
-            (get-parameters child))]))
+  (send object serialize))
 
 (define (write-components-to-file components [filename "components.blob"])
   (call-with-output-file

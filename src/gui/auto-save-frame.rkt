@@ -6,6 +6,11 @@
 
     (init-field auto-save-callback)
 
+    (define/public
+      (set-auto-save-callback callback)
+      
+      (set! auto-save-callback callback))
+
     (define/augment
       (on-close)
 

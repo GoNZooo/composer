@@ -1,15 +1,16 @@
 #lang racket/gui
 
-(require "parent-manipulation.rkt"
-         "parameters.rkt")
+(require "../parameters.rkt")
 
 (provide movable-button%)
 (define movable-button%
   (class button%
 
-    (init template-text)
+    (init-field clear
+                template)
 
-    (define template template-text)
+    (define (move direction)
+      (send (send this get-parent) move-button this direction))
 
     (define/override
       (on-subwindow-event receiver event)
@@ -18,15 +19,22 @@
         [(and (edit-mode)
               (equal? (send event get-event-type)
                       'left-down))
-         (move-left-in-container this)]
+         (move 'left)]
         [(and (edit-mode)
               (equal? (send event get-event-type)
                       'right-down))
-         (move-right-in-container this)]
+         (move 'right)]
         [else #f]))
 
     (define/public
       (get-template)
       template)
+
+    (define/public
+      (serialize)
+
+      (if clear
+        `(button ,(send this get-label) ,template clear)
+        `(button ,(send this get-label) ,template)))
 
     (super-new)))

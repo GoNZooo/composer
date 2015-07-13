@@ -1,1 +1,3 @@
-(column (row (label "Misc")) (row (label "Other?") (label "duno...")) (row (button "HejHopp" "murg")) (row (label "Fin.")) (row (button "Button 1" "content") (button "Страхотно" "Страхотно...") (button "Отлично" "Отлично!") (button "Button 2" "other content")))
+(templates
+ (section "Hej" (row (button "hej" "hopp" clear)))
+ (section "Hopp" (row (button "hopp" "hej" clear))))
