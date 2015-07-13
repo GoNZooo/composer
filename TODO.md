@@ -5,3 +5,4 @@
 - Ability to add buttons/labels
 
 ### Extras
+- Color-coding for button (and/or sections)
