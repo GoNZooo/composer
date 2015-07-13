@@ -18,7 +18,6 @@
               cs)))
 
     (define (make-buttons buttons)
-      (printf "Buttons: ~a~n" buttons)
       (define (make-button b)
         (match b
           [(list 'button name text clear)
