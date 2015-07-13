@@ -7,12 +7,12 @@
   (class horizontal-panel%
     (super-new)
 
-	(init-field label)
+    (init-field label)
 
-	(define label-message (new message%
-							   [parent this]
-							   [label label]))
-    
+    (define label-message (new message%
+                               [parent this]
+                               [label label]))
+
     (define/public
       (serialize)
       (send label-message get-label))))

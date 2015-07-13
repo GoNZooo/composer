@@ -39,7 +39,7 @@
     (make-buttons buttons)
 
     (define/public
-	  (move-child child direction)
+      (move-child child direction)
       (set-children (case direction
                       [(left) (move-left child (send this get-children))]
                       [(right) (move-right child (send this get-children))]

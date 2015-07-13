@@ -33,15 +33,15 @@
                   [section-label (cadr s)]
                   [rows (cddr s)]))
            sections))
-    
+
     (init-sections sections)
 
     (define/public (move-child child direction)
-      (set-children
-		(case direction
-		  [(left) (move-left child (send this get-children))]
-		  [(right) (move-right child (send this get-children))]
-		  [else #f])))
+                   (set-children
+                     (case direction
+                       [(left) (move-left child (send this get-children))]
+                       [(right) (move-right child (send this get-children))]
+                       [else #f])))
 
     (define/public
       (serialize)

@@ -1,9 +1,9 @@
 #lang racket/gui
 
 (require "../parameters.rkt"
-		 "parent-manipulation.rkt"
+         "parent-manipulation.rkt"
          "section-label.rkt"
-		 "section-rows.rkt")
+         "section-rows.rkt")
 
 (provide section%)
 (define section%
@@ -14,14 +14,14 @@
     (init-field section-label)
 
     (define inner-section-label (new section-label%
-									 [parent this]
-									 [label section-label]
-									 [alignment '(center top)]))
+                                     [parent this]
+                                     [label section-label]
+                                     [alignment '(center top)]))
 
-	(define inner-section-rows (new section-rows%
-									[parent this]
-									[rows (cdar rows)]
-									[alignment '(center top)]))
+    (define inner-section-rows (new section-rows%
+                                    [parent this]
+                                    [rows (cdar rows)]
+                                    [alignment '(center top)]))
 
     (define (move direction)
       (send (send this get-parent) move-child this direction))
@@ -51,6 +51,6 @@
       (serialize)
 
       (cons 'section
-			(list (send inner-section-label serialize)
-				  (send inner-section-rows serialize))))
+            (list (send inner-section-label serialize)
+                  (send inner-section-rows serialize))))
     ))
