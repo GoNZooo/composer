@@ -4,6 +4,7 @@
          "parent-manipulation.rkt"
          "section.rkt")
 
+(require racket/pretty)
 (provide template-content%)
 (define template-content%
   (class vertical-panel%
@@ -18,7 +19,6 @@
               cs)))
 
     (define (make-sections sections)
-      (printf "Sections: ~a~n" sections)
       (set-children (map (lambda (s)
                            (new section%
                                 [parent this]
@@ -36,13 +36,12 @@
     
     (init-sections sections)
 
-    (define (move-child child direction)
+    (define/public (move-child child direction)
       (set-children
-        (lambda (c)
-          (case direction
-            [(left) (move-left child (send this get-children))]
-            [(right) (move-right child (send this get-children))]
-            [else #f]))))
+		(case direction
+		  [(left) (move-left child (send this get-children))]
+		  [(right) (move-right child (send this get-children))]
+		  [else #f])))
 
     (define/public
       (serialize)

@@ -4,9 +4,15 @@
 
 (provide section-label%)
 (define section-label%
-  (class message%
+  (class horizontal-panel%
     (super-new)
+
+	(init-field label)
+
+	(define label-message (new message%
+							   [parent this]
+							   [label label]))
     
     (define/public
       (serialize)
-      (send this get-label))))
+      (send label-message get-label))))

@@ -1,3 +1,10 @@
 (templates
- (section "Hej" (row (button "hej" "hopp" clear)))
- (section "Hopp" (row (button "hopp" "hej" clear))))
+ (section
+  "Docs"
+  (rows
+   (row
+    (button "ID" "Need ID")
+    (button "POA" "Need POA")
+    (button "CCs" "Need CCs"))
+   (row (button "Docs requirements" "Here are the docs requirements"))))
+ (section "WDs" (rows (row (button "BT" "Information about BT WD")))))

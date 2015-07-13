@@ -10,7 +10,7 @@
                 template)
 
     (define (move direction)
-      (send (send this get-parent) move-button this direction))
+      (send (send this get-parent) move-child this direction))
 
     (define/override
       (on-subwindow-event receiver event)

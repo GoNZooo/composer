@@ -38,14 +38,15 @@
 
     (make-buttons buttons)
 
-    (define (move-child child direction)
+    (define/public
+	  (move-child child direction)
       (set-children (case direction
                       [(left) (move-left child (send this get-children))]
                       [(right) (move-right child (send this get-children))]
                       [else #f])))
 
     (define (move direction)
-      (send (send this get-parent) move-row direction))
+      (send (send this get-parent) move-child this direction))
 
     (define/override
       (on-subwindow-event receiver event)

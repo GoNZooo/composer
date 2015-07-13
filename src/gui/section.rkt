@@ -1,8 +1,9 @@
 #lang racket/gui
 
-(require "parent-manipulation.rkt"
+(require "../parameters.rkt"
+		 "parent-manipulation.rkt"
          "section-label.rkt"
-         "row.rkt")
+		 "section-rows.rkt")
 
 (provide section%)
 (define section%
@@ -12,32 +13,34 @@
     (init rows)
     (init-field section-label)
 
-    (define (set-children cs)
-      (send this
-            change-children
-            (lambda (children)
-              cs)))
+    (define inner-section-label (new section-label%
+									 [parent this]
+									 [label section-label]
+									 [alignment '(center top)]))
 
-    (define (make-rows rows)
-      (for-each (lambda (r)
-                  (new row%
-                       [parent this]
-                       [buttons (cdr r)]
-                       [alignment '(center top)]))
-                rows))
+	(define inner-section-rows (new section-rows%
+									[parent this]
+									[rows (cdar rows)]
+									[alignment '(center top)]))
 
-    (new section-label%
-         [parent this]
-         [label section-label])
-    (make-rows rows)
+    (define (move direction)
+      (send (send this get-parent) move-child this direction))
 
-    (define (move-child child direction)
-      (set-children
-        (lambda (c)
-          (case direction
-            [(left) (move-left child (send this get-children))]
-            [(right) (move-right child (send this get-children))]
-            [else #f]))))
+    (define/override
+      (on-subwindow-event receiver event)
+
+      (cond
+        [(and (edit-mode)
+              (equal? (send event get-event-type)
+                      'left-down)
+              (send event get-control-down))
+         (move 'left)]
+        [(and (edit-mode)
+              (equal? (send event get-event-type)
+                      'right-down)
+              (send event get-control-down))
+         (move 'right)]
+        [else #f]))
 
     (define/public
       (get-section-label)
@@ -48,7 +51,6 @@
       (serialize)
 
       (cons 'section
-            (map (lambda (child)
-                   (send child serialize))
-                 (send this get-children))))
+			(list (send inner-section-label serialize)
+				  (send inner-section-rows serialize))))
     ))
