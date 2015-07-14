@@ -21,7 +21,10 @@
 
   (define add-dialog (new add-dialog%
                           [label "Add component"]
-                          [parent top-frame]))
+                          [parent top-frame]
+                          [sections
+                            (send template-content-panel
+                                  get-sections)]))
 
   (btn edit-mode-switch built-in-panel "Edit-mode"
        (lambda (b e)

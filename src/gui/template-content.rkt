@@ -18,6 +18,11 @@
             (lambda (children)
               cs)))
 
+    (define/public
+      (get-sections)
+      
+      inner-sections)
+
     (define (make-sections sections)
       (set-children (map (lambda (s)
                            (new section%
