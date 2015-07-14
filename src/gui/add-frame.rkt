@@ -13,4 +13,13 @@
                       "Section")]
            [parent this]
            [style '(vertical
-                     vertical-label)]))))
+                     vertical-label)]))
+    
+    (define add-button
+      (new button%
+           [label "Add"]
+           [parent this]
+           [callback
+             (lambda (button event)
+               (printf "~a~n" (send type-radio-box
+                                    get-selection)))]))))
