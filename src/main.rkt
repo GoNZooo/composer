@@ -43,7 +43,7 @@
 
   (btn add-button built-in-panel "Add component"
        (lambda (b e)
-         (send add-frame show #t)))
+         (send add-dialog show #t)))
 
   (define template-content-panel (make-components (call-with-input-file
                                                     "components.blob"
