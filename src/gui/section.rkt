@@ -57,6 +57,6 @@
     (define/public
       (add-button name template clear)
       
-      (send (car inner-section-rows)
+      (send inner-section-rows
             add-button name template clear))
     ))
