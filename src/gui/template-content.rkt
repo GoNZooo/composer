@@ -34,19 +34,34 @@
                   [rows (cddr s)]))
            sections))
 
-    (init-sections sections)
+    (define inner-sections (init-sections sections))
 
-    (define/public (move-child child direction)
-                   (set-children
-                     (case direction
-                       [(left) (move-left child (send this get-children))]
-                       [(right) (move-right child (send this get-children))]
-                       [else #f])))
+    (define/public
+      (move-child child direction)
+
+      (set! inner-sections
+        (case direction
+          [(left) (move-left child inner-sections)]
+          [(right) (move-right child inner-sections)]
+          [else #f]))
+      (set-children inner-sections))
+
+    (define (find-section name [sections inner-sections])
+      (for/or ([section sections])
+        (if (equal? name (send section get-section-label))
+          section
+          #f)))
+
+    (define/public
+      (add-button section name template clear)
+      
+      (send (find-section section)
+            add-button name template clear))
 
     (define/public
       (serialize)
 
-      (cons 'templates (map (lambda (child)
-                              (send child serialize))
-                            (send this get-children))))
+      (cons 'templates (map (lambda (section)
+                              (send section serialize))
+                            inner-sections)))
     ))

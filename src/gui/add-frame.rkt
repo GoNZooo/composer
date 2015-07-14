@@ -7,6 +7,13 @@
   (class frame%
     (super-new)
 
+    (define/public
+      (add-button section name template clear)
+      
+      (send (send this get-parent)
+            add-button
+            section name template clear))
+
     (define type-radio-box
       (new radio-box%
            [label "Type of item"]

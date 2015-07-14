@@ -53,4 +53,10 @@
       (cons 'section
             (list (send inner-section-label serialize)
                   (send inner-section-rows serialize))))
+
+    (define/public
+      (add-button name template clear)
+      
+      (send (car inner-section-rows)
+            add-button name template clear))
     ))

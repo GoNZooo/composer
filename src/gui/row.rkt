@@ -33,17 +33,27 @@
                 [template text]
                 [clear #f])]))
 
-      (set-children (map make-button
-                         buttons)))
+      (map make-button buttons))
 
-    (make-buttons buttons)
+    (define buttons (make-buttons buttons))
 
     (define/public
       (move-child child direction)
-      (set-children (case direction
-                      [(left) (move-left child (send this get-children))]
-                      [(right) (move-right child (send this get-children))]
-                      [else #f])))
+      (define new-buttons )
+      (set! buttons (case direction
+                            [(left) (move-left child buttons)]
+                            [(right) (move-right child buttons)]
+                            [else #f]))
+      (set-children buttons))
+
+    (define/public
+      (add-button name template clear)
+      
+      (set! buttons (cons (new movable-button%
+                               [label name]
+                               [template template]
+                               [clear clear])))
+      (set-children buttons))
 
     (define (move direction)
       (send (send this get-parent) move-child this direction))

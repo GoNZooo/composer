@@ -46,6 +46,9 @@
                                                     "components.blob"
                                                     read)
                                                   top-frame))
+  (send top-frame
+        set-template-content-panel
+        template-content-panel)
 
   (define (components)
     (serialize-object template-content-panel))

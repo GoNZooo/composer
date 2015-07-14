@@ -6,7 +6,8 @@
 
     (field [auto-save-callback
              (lambda ()
-               #f)])
+               #f)]
+           [template-content-panel #f])
     
     (define/public
       (set-auto-save-callback callback)
@@ -17,5 +18,17 @@
       (on-close)
 
       (auto-save-callback))
+
+    (define/public
+      (set-template-content-panel panel)
+      
+      (set! template-content-panel panel))
+
+    (define/public
+      (add-button section name template)
+      
+      (send template-content-panel
+            add-button
+            section name template))
 
     (super-new)))
