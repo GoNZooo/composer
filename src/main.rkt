@@ -19,6 +19,10 @@
                               [parent top-frame]
                               [alignment '(center top)]))
 
+  (define add-frame (new add-frame%
+                         [label "Add component"]
+                         [parent top-frame]))
+
   (btn edit-mode-switch built-in-panel "Edit-mode"
        (lambda (b e)
          (edit-mode (not (edit-mode)))))
@@ -36,9 +40,6 @@
 
   (btn add-button built-in-panel "Add component"
        (lambda (b e)
-         (define add-frame (new add-frame%
-                                [label "Add component"]
-                                [parent top-frame]))
          (send add-frame show #t)))
 
   (define template-content-panel (make-components (call-with-input-file
