@@ -4,11 +4,10 @@
 (define auto-save-frame%
   (class frame%
 
-    (field auto-save-callback)
-    (define auto-save-callback
-      (lambda ()
-        #f))
-
+    (field [auto-save-callback
+             (lambda ()
+               #f)])
+    
     (define/public
       (set-auto-save-callback callback)
 
