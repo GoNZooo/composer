@@ -43,6 +43,5 @@
                      (send name-field get-value)
                      (send template-field get-value)
                      (send clear-check-box get-value))
-               (send (send this get-parent)
-                     add-done))]))
+               )]))
     ))
