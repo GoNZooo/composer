@@ -12,4 +12,4 @@
                       "Row"
                       "Section")]
            [parent this]
-           [style '(horizontal)]))))
+           [style '(vertical-label)]))))
