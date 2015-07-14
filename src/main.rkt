@@ -24,6 +24,10 @@
        (lambda (b e)
          (edit-mode (not (edit-mode)))))
 
+  (btn iconize-window built-in-panel "Iconize window"
+       (lambda (b e)
+         (send built-in-panel iconize #t)))
+
   (btn clear-clipboard built-in-panel "Clear clipboard"
        (lambda (b e)
          (send the-clipboard
@@ -31,9 +35,11 @@
                ""
                (send e get-time-stamp))))
 
-  (btn iconize-window built-in-panel "Iconize window"
+  (btn add-button built-in-panel "Add component"
        (lambda (b e)
-         (send built-in-panel iconize #t)))
+         (new add-dialog%
+              [label "Add component"]
+              [parent top-frame])))
 
   (define template-content-panel (make-components (call-with-input-file
                                                     "components.blob"
