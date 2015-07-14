@@ -12,12 +12,12 @@
     (init rows)
 
     (define (make-rows rows)
-      (for-each (lambda (r)
-                  (new row%
-                       [parent this]
-                       [buttons (cdr r)]
-                       [alignment '(center top)]))
-                rows))
+      (map (lambda (r)
+             (new row%
+                  [parent this]
+                  [buttons (cdr r)]
+                  [alignment '(center top)]))
+           rows))
 
     (define inner-rows (make-rows rows))
 
