@@ -19,14 +19,6 @@
                               [parent top-frame]
                               [alignment '(center top)]))
 
-  (define add-dialog (new add-dialog%
-                          [label "Add component"]
-                          [parent top-frame]
-                          [sections
-                            (send (send top-frame
-                                        get-template-content-panel)
-                                  get-sections)]))
-
   (btn edit-mode-switch built-in-panel "Edit-mode"
        (lambda (b e)
          (edit-mode (not (edit-mode)))))
@@ -53,6 +45,14 @@
   (send top-frame
         set-template-content-panel
         template-content-panel)
+
+  (define add-dialog (new add-dialog%
+                          [label "Add component"]
+                          [parent top-frame]
+                          [sections
+                            (send (send top-frame
+                                        get-template-content-panel)
+                                  get-sections)]))
 
   (define (components)
     (serialize-object template-content-panel))
