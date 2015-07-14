@@ -29,7 +29,7 @@
            [parent this]
            [label "Add button"]))
 
-    (define add-button
+    (define add-button-button
       (new button%
            [label "Add"]
            [parent this]
