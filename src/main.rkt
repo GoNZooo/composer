@@ -38,9 +38,10 @@
 
   (btn add-button built-in-panel "Add component"
        (lambda (b e)
-         (new add-dialog%
-              [label "Add component"]
-              [parent top-frame])))
+         (define add-dialog (new add-dialog%
+                                 [label "Add component"]
+                                 [parent top-frame]))
+         (send add-dialog show #t)))
 
   (define template-content-panel (make-components (call-with-input-file
                                                     "components.blob"
