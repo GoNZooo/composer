@@ -17,7 +17,7 @@
             (lambda (children)
               cs)))
 
-    (define (make-buttons buttons)
+    (define (make-buttons bs)
       (define (make-button b)
         (match b
           [(list 'button name text clear)
@@ -33,27 +33,26 @@
                 [template text]
                 [clear #f])]))
 
-      (map make-button buttons))
+      (map make-button bs))
 
-    (define buttons (make-buttons buttons))
+    (define inner-buttons (make-buttons buttons))
 
     (define/public
       (move-child child direction)
-      (define new-buttons )
-      (set! buttons (case direction
-                            [(left) (move-left child buttons)]
-                            [(right) (move-right child buttons)]
+      (set! inner-buttons (case direction
+                            [(left) (move-left child inner-buttons)]
+                            [(right) (move-right child inner-buttons)]
                             [else #f]))
-      (set-children buttons))
+      (set-children inner-buttons))
 
     (define/public
       (add-button name template clear)
       
-      (set! buttons (cons (new movable-button%
+      (set! inner-buttons (cons (new movable-button%
                                [label name]
                                [template template]
                                [clear clear])))
-      (set-children buttons))
+      (set-children inner-buttons))
 
     (define (move direction)
       (send (send this get-parent) move-child this direction))
