@@ -40,4 +40,9 @@
              (lambda (button event)
                (case (send type-radio-box get-selection)
                  [(0) (send add-button-dialog show #t)]
-                 [else #f]))]))))
+                 [else #f]))]))
+    
+    (define/public
+      (add-done)
+      
+      (send this show #f))))
