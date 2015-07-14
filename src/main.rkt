@@ -10,6 +10,10 @@
          "gui/add-frame.rkt")
 
 (define (main-window)
+  (define (get-sections)
+    (send template-content-panel
+          get-sections))
+
   (define top-frame (new auto-save-frame%
                          [label "Invoker 1.0 [2015-07-XX]"]
                          [alignment '(center top)]
@@ -23,8 +27,7 @@
                           [label "Add component"]
                           [parent top-frame]
                           [sections
-                            (send template-content-panel
-                                  get-sections)]))
+                            (get-sections)]))
 
   (btn edit-mode-switch built-in-panel "Edit-mode"
        (lambda (b e)
