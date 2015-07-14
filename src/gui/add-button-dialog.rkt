@@ -10,7 +10,9 @@
     (define section-combo-field
       (new combo-field%
            [parent this]
-           [choices sections]
+           [choices (map (lambda (s)
+                           (send s get-section-label))
+                         sections)]
            [label "Section"]))
     
     (define name-field
