@@ -6,7 +6,8 @@
 
          "parameters.rkt"
          "loader.rkt"
-         "gui/auto-save-frame.rkt")
+         "gui/auto-save-frame.rkt"
+         "gui/add-dialog.rkt")
 
 (define (main-window)
   (define top-frame (new auto-save-frame%
