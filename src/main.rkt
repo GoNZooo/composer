@@ -13,8 +13,6 @@
   (define top-frame (new auto-save-frame%
                          [label "Invoker 2.0 [2015-07-XX]"]
                          [alignment '(center top)]
-                         [auto-save-callback (lambda ()
-                                               #f)]
                          [style (window-style)]))
 
   (define built-in-panel (new horizontal-panel%

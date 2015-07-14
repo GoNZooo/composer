@@ -4,7 +4,7 @@
 (define auto-save-frame%
   (class frame%
 
-    (init-field auto-save-callback)
+    (field auto-save-callback)
 
     (define/public
       (set-auto-save-callback callback)
