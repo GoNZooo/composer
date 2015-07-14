@@ -30,10 +30,10 @@
       template-content-panel)
 
     (define/public
-      (add-button section name template)
+      (add-button section name template clear)
       
       (send template-content-panel
             add-button
-            section name template))
+            section name template clear))
 
     (super-new)))
