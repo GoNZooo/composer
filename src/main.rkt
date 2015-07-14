@@ -40,7 +40,8 @@
        (lambda (b e)
          (define add-frame (new add-frame%
                                 [label "Add component"]
-                                [parent top-frame]))))
+                                [parent top-frame]))
+         (send add-frame show #t)))
 
   (define template-content-panel (make-components (call-with-input-file
                                                     "components.blob"
