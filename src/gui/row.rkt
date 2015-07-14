@@ -53,7 +53,8 @@
                                      [parent this]
                                      [label name]
                                      [template template]
-                                     [clear clear])))
+                                     [clear clear])
+                                inner-buttons))
       (set-children inner-buttons))
 
     (define (move direction)
