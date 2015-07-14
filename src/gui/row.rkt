@@ -39,6 +39,7 @@
 
     (define/public
       (move-child child direction)
+
       (set! inner-buttons (case direction
                             [(left) (move-left child inner-buttons)]
                             [(right) (move-right child inner-buttons)]
@@ -49,9 +50,10 @@
       (add-button name template clear)
       
       (set! inner-buttons (cons (new movable-button%
-                               [label name]
-                               [template template]
-                               [clear clear])))
+                                     [parent this]
+                                     [label name]
+                                     [template template]
+                                     [clear clear])))
       (set-children inner-buttons))
 
     (define (move direction)
