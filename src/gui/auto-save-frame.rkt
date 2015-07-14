@@ -25,6 +25,11 @@
       (set! template-content-panel panel))
 
     (define/public
+      (get-template-content-panel)
+      
+      template-content-panel)
+
+    (define/public
       (add-button section name template)
       
       (send template-content-panel
