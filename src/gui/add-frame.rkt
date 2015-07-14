@@ -1,8 +1,8 @@
 #lang racket/gui
 
-(provide add-dialog%)
-(define add-dialog%
-  (class dialog%
+(provide add-frame%)
+(define add-frame%
+  (class frame%
     (super-new)
     
     (define type-radio-box
