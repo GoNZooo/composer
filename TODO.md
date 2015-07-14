@@ -8,3 +8,4 @@
 ### Extras
 - Color-coding for button (and/or sections)
 - Add drag'n'drop for buttons/rows/sections
+- Tabs for different tasks
