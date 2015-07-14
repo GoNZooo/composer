@@ -1,5 +1,7 @@
 #lang racket/gui
 
+(require "add-button-dialog.rkt")
+
 (provide add-frame%)
 (define add-frame%
   (class frame%
