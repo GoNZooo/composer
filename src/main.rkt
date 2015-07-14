@@ -19,9 +19,9 @@
                               [parent top-frame]
                               [alignment '(center top)]))
 
-  (define add-frame (new add-frame%
-                         [label "Add component"]
-                         [parent top-frame]))
+  (define add-dialog (new add-dialog%
+                          [label "Add component"]
+                          [parent top-frame]))
 
   (btn edit-mode-switch built-in-panel "Edit-mode"
        (lambda (b e)

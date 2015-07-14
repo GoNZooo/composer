@@ -2,10 +2,12 @@
 
 (require "add-button-dialog.rkt")
 
-(provide add-frame%)
-(define add-frame%
-  (class frame%
+(provide add-dialog%)
+(define add-dialog%
+  (class dialog%
     (super-new)
+
+    (init-field sections)
 
     (define/public
       (add-button section name template clear)
@@ -27,7 +29,8 @@
     (define add-button-dialog
       (new add-button-dialog%
            [parent this]
-           [label "Add button"]))
+           [label "Add button"]
+           [sections sections]))
 
     (define add-button-button
       (new button%
