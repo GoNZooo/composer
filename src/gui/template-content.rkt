@@ -75,7 +75,9 @@
       (set! inner-sections
         (cons (new section%
                    [section-label name]
-                   [rows '()]))))
+                   [rows '()])))
+      
+      (set-children inner-sections))
 
     (define/public
       (serialize)
