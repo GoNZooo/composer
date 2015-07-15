@@ -25,7 +25,7 @@
             add-row section))
     
     (define/public
-      (add-row name)
+      (add-section name)
       
       (send (send this get-parent)
             add-section name))
