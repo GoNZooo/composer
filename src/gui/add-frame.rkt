@@ -21,7 +21,7 @@
       (add-row section)
       
       (send (send this get-parent)
-            add-button section))
+            add-row section))
 
     (define type-radio-box
       (new radio-box%
