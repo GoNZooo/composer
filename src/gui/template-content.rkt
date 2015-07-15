@@ -76,7 +76,8 @@
         (cons (new section%
                    [parent this]
                    [section-label name]
-                   [rows `((row ()))])))
+                   [rows (cdar `(section
+                                  ,name (rows (row ()))))])))
       
       (set-children inner-sections))
 
