@@ -23,6 +23,12 @@
       
       (send (send this get-parent)
             add-row section))
+    
+    (define/public
+      (add-row name)
+      
+      (send (send this get-parent)
+            add-section name))
 
     (define type-radio-box
       (new radio-box%
