@@ -1,6 +1,7 @@
 #lang racket/gui
 
-(require "add-button-dialog.rkt")
+(require "add-button-dialog.rkt"
+         "add-row-dialog.rkt")
 
 (provide add-dialog%)
 (define add-dialog%
