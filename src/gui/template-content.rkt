@@ -64,6 +64,12 @@
             add-button name template clear))
 
     (define/public
+      (add-row section)
+      
+      (send (find-section section)
+            add-row))
+
+    (define/public
       (serialize)
 
       (cons 'templates (map (lambda (section)
