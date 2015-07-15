@@ -16,6 +16,12 @@
             add-button
             section name template clear))
 
+    (define/public
+      (add-row section)
+      
+      (send (send this get-parent)
+            add-button section))
+
     (define type-radio-box
       (new radio-box%
            [label "Type of item"]
