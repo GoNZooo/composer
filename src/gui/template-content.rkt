@@ -74,6 +74,7 @@
       
       (set! inner-sections
         (cons (new section%
+                   [parent this]
                    [section-label name]
                    [rows '(rows (row ()))])))
       
