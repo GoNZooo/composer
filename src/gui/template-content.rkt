@@ -76,7 +76,8 @@
         (cons (new section%
                    [parent this]
                    [section-label name]
-                   [rows '((rows (row ())))])))
+                   [rows '((rows (row ())))])
+              inner-sections))
       
       (set-children inner-sections))
 
