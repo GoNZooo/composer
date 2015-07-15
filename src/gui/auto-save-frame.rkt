@@ -43,4 +43,11 @@
             add-row
             section))
 
+    (define/public
+      (add-section name)
+      
+      (send template-content-panel
+            add-section
+            name))
+
     (super-new)))
