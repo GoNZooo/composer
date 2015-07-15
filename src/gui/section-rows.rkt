@@ -39,7 +39,7 @@
     (define/public
       (add-button name template clear)
       
-      (send (car (reverse inner-rows))
+      (send (car inner-rows)
             add-button
             name template clear))
 
