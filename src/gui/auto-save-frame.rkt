@@ -36,4 +36,11 @@
             add-button
             section name template clear))
 
+    (define/public
+      (add-row section)
+      
+      (send template-content-panel
+            add-row
+            section))
+
     (super-new)))
