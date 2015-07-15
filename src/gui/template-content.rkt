@@ -70,6 +70,14 @@
             add-row))
 
     (define/public
+      (add-section name)
+      
+      (set! inner-sections
+        (cons (new section%
+                   [section-label name]
+                   [rows '()]))))
+
+    (define/public
       (serialize)
 
       (cons 'templates (map (lambda (section)
