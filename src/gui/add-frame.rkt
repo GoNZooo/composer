@@ -44,6 +44,11 @@
            [parent this]
            [label "Add row"]
            [sections sections]))
+    
+    (define add-section-dialog
+      (new add-section-dialog%
+           [parent this]
+           [label "Add section"]))
 
     (define add-button-button
       (new button%
@@ -54,6 +59,7 @@
                (case (send type-radio-box get-selection)
                  [(0) (send add-button-dialog show #t)]
                  [(1) (send add-row-dialog show #t)]
+                 [(2) (send add-section-dialog show #t)]
                  [else #f]))]))
     
     (define/public
