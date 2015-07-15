@@ -59,4 +59,10 @@
       
       (send inner-section-rows
             add-button name template clear))
+
+    (define/public
+      (add-row section)
+      
+      (send inner-section-rows
+            add-row))
     ))
