@@ -31,7 +31,8 @@
                 [parent this]
                 [label name]
                 [template text]
-                [clear #f])]))
+                [clear #f])]
+          ['() '()]))
 
       (map make-button bs))
 
