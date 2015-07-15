@@ -44,6 +44,17 @@
             name template clear))
 
     (define/public
+      (add-row)
+      
+      (set! inner-rows
+        (cons (new row%
+                   [parent this]
+                   [buttons '()])
+              inner-rows))
+      
+      (set-children inner-rows))
+
+    (define/public
       (serialize)
 
       (cons 'rows
