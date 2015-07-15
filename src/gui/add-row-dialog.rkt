@@ -17,9 +17,10 @@
                          sections)]
            [label "Section"]))
     
-    (define add-row
-      (new row%
+    (define add-row-button
+      (new button%
            [parent this]
+           [label "Add"]
            [callback
              (lambda (button event)
                (send (send this get-parent)
