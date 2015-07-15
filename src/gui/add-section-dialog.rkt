@@ -1,7 +1,5 @@
 #lang racket/gui
 
-(require "row.rkt")
-
 (provide add-section-dialog%)
 (define add-section-dialog%
   (class dialog%
