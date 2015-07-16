@@ -37,7 +37,8 @@
                   [template template]
                   [clear clear]
                   [sections (send (send this get-parent)
-                                  get-sections)]))
+                                  get-sections)]
+                  [top-level-window (send this get-top-level-window)]))
            (send inner-edit-button-dialog
                  show #t))]
         [(and (edit-mode)

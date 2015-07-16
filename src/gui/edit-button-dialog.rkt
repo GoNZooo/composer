@@ -10,7 +10,8 @@
           clear
           sections
           edited-button
-          parent-row)
+          parent-row
+          top-level-window)
     
     (define section-combo-field
       (new combo-field%
@@ -45,7 +46,7 @@
            [label "Edit"]
            [callback
              (lambda (button event)
-               (send (send this get-top-level-window)
+               (send top-level-window
                      add-button
                      (send section-combo-field get-value)
                      (send name-field get-value)
