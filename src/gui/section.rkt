@@ -26,22 +26,6 @@
     (define (move direction)
       (send (send this get-parent) move-child this direction))
 
-    (define/override
-      (on-subwindow-event receiver event)
-
-      (cond
-        [(and (edit-mode)
-              (equal? (send event get-event-type)
-                      'left-down)
-              (send event get-control-down))
-         (move 'left)]
-        [(and (edit-mode)
-              (equal? (send event get-event-type)
-                      'right-down)
-              (send event get-control-down))
-         (move 'right)]
-        [else #f]))
-
     (define/public
       (get-sections)
       

@@ -13,6 +13,22 @@
                                [parent this]
                                [label label]))
 
+    (define/override
+      (on-subwindow-event receiver event)
+
+      (cond
+        [(and (edit-mode)
+              (equal? (send event get-event-type)
+                      'left-down)
+              (send event get-control-down))
+         (move 'left)]
+        [(and (edit-mode)
+              (equal? (send event get-event-type)
+                      'right-down)
+              (send event get-control-down))
+         (move 'right)]
+        [else #f]))
+
     (define/public
       (serialize)
       (send label-message get-label))))
