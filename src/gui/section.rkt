@@ -23,7 +23,9 @@
                                     [rows (cdar rows)]
                                     [alignment '(center top)]))
 
-    (define (move direction)
+    (define/public
+      (move direction)
+
       (send (send this get-parent) move-child this direction))
 
     (define/public

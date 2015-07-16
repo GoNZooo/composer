@@ -21,12 +21,16 @@
               (equal? (send event get-event-type)
                       'left-down)
               (send event get-control-down))
-         (move 'left)]
+         (send (send this get-parent)
+               move
+               'left)]
         [(and (edit-mode)
               (equal? (send event get-event-type)
                       'right-down)
               (send event get-control-down))
-         (move 'right)]
+         (send (send this get-parent)
+               move
+               'right)]
         [else #f]))
 
     (define/public
