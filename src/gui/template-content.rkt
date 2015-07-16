@@ -11,7 +11,6 @@
     (super-new)
 
     (init sections)
-    (field [inner-sections '()])
 
     (define (init-sections sections)
       (map (lambda (s)
@@ -21,7 +20,9 @@
                   [rows (cddr s)]))
            sections))
 
-    (define (set-children cs)
+    (field [inner-sections (init-sections sections)])
+
+    (define (set-sections cs)
       (set! inner-sections cs)
       (send this
             change-children
@@ -41,7 +42,7 @@
           [(left) (move-left child inner-sections)]
           [(right) (move-right child inner-sections)]
           [else #f]))
-      (set-children inner-sections))
+      (set-sections inner-sections))
 
     (define (find-section name [sections inner-sections])
       (for/or ([section sections])
@@ -71,7 +72,7 @@
                    [rows '((rows (row ())))])
               inner-sections))
       
-      (set-children inner-sections))
+      (set-sections inner-sections))
 
     (define/public
       (serialize)
