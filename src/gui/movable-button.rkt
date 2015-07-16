@@ -19,7 +19,7 @@
       (new edit-button-dialog%
            [parent #f]
            [name name]
-           [parent-row (send this (get-parent))]
+           [parent-row (send this get-parent)]
            [label "Edit button"]
            [template template]
            [clear clear]
