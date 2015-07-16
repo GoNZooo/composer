@@ -14,7 +14,7 @@
                                [parent this]
                                [label label]))
 
-    (define inner-edit-row-dialog #f)
+    (define inner-edit-section-dialog #f)
 
     (define/override
       (on-subwindow-event receiver event)
