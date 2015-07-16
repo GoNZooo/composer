@@ -83,7 +83,7 @@
                   (not (eqv? s
                              section)))
                 inner-sections))
-      (set-sections inner-section))
+      (set-sections inner-sections))
 
     (define/public
       (serialize)
