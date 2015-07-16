@@ -23,7 +23,7 @@
       (new text-field%
            [parent this]
            [label "Button name:"]
-           [init-value button-name]))
+           [init-value name]))
 
     (define clear-check-box
       (new check-box%
