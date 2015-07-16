@@ -66,5 +66,4 @@
       (cons 'rows
             (map (lambda (child)
                    (send child serialize))
-                 (send this get-children))))
-    ))
+                 (send this get-children))))))

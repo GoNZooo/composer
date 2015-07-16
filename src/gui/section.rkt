@@ -70,5 +70,4 @@
       (add-row)
       
       (send inner-section-rows
-            add-row))
-    ))
+            add-row))))

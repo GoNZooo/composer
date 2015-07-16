@@ -86,5 +86,4 @@
 
       (cons 'templates (map (lambda (section)
                               (send section serialize))
-                            inner-sections)))
-    ))
+                            inner-sections)))))

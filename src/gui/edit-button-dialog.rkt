@@ -51,5 +51,4 @@
                      (send template-field get-value)
                      (send clear-check-box get-value))
                (send (send this get-parent)
-                     remove-self))]))
-    ))
+                     remove-self))]))))
