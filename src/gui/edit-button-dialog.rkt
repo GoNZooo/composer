@@ -9,7 +9,8 @@
           template
           clear
           sections
-          edited-button)
+          edited-button
+          parent-row)
     
     (define section-combo-field
       (new combo-field%
