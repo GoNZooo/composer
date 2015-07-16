@@ -11,6 +11,7 @@
     (super-new)
 
     (init sections)
+    (field [inner-sections '()])
 
     (define (init-sections sections)
       (map (lambda (s)
