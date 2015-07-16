@@ -40,7 +40,7 @@
            [style '(multiple)]
            [init-value template]))
     
-    (define edit-button
+    (define edit-button-button
       (new button%
            [parent this]
            [label "Edit"]
@@ -52,5 +52,14 @@
                      (send name-field get-value)
                      (send template-field get-value)
                      (send clear-check-box get-value))
+               (send parent-row
+                     remove-button edited-button))]))
+    
+    (define remove-button-button
+      (new button%
+           [parent this]
+           [label "Remove"]
+           [callback
+             (lambda (button event)
                (send parent-row
                      remove-button edited-button))]))))
