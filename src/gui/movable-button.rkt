@@ -36,7 +36,8 @@
               [template template]
               [clear clear]
               [sections (send (send this get-parent)
-                              get-sections)])]
+                              get-sections)]
+              [show #t])]
         [else #f]))
 
     (define/public
