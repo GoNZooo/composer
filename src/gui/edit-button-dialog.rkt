@@ -8,7 +8,8 @@
     (init name
           template
           clear
-          sections)
+          sections
+          edited-button)
     
     (define section-combo-field
       (new combo-field%
@@ -38,10 +39,10 @@
            [style '(multiple)]
            [init-value template]))
     
-    (define add-button
+    (define edit-button
       (new button%
            [parent this]
-           [label "Modify"]
+           [label "Edit"]
            [callback
              (lambda (button event)
                (send (send this get-parent)
@@ -51,4 +52,4 @@
                      (send template-field get-value)
                      (send clear-check-box get-value))
                (send (send this get-parent)
-                     remove-self))]))))
+                     remove-button edited-button))]))))

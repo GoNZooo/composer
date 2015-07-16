@@ -17,7 +17,7 @@
 
     (define inner-edit-button-dialog
       (new edit-button-dialog%
-           [parent this]
+           [parent (send this get-parent)]
            [name name]
            [label "Edit button"]
            [template template]
@@ -54,13 +54,6 @@
       (get-button-label)
 
       (send this get-label))
-
-    (define/public
-      (remove-self)
-
-      (send (send this get-parent)
-            remove-button
-            this))
 
     (define/public
       (serialize)
