@@ -48,6 +48,12 @@
       (set-children inner-buttons))
 
     (define/public
+      (get-sections)
+      
+      (send (send this get-parent)
+            get-sections))
+
+    (define/public
       (add-button name template clear)
       
       (set! inner-buttons (cons (new movable-button%
@@ -57,6 +63,13 @@
                                      [clear clear])
                                 inner-buttons))
       (set-children inner-buttons))
+
+    (define/public
+      (remove-button button)
+      
+      (set! inner-buttons
+        (for/list ([b inner-buttons])
+          (not (equal? b button)))))
 
     (define (move direction)
       (send (send this get-parent) move-child this direction))

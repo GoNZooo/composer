@@ -43,6 +43,12 @@
         [else #f]))
 
     (define/public
+      (get-sections)
+      
+      (send (send this get-parent)
+            get-sections))
+
+    (define/public
       (get-section-label)
 
       section-label)

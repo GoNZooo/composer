@@ -37,6 +37,12 @@
       (set-children inner-rows))
 
     (define/public
+      (get-sections)
+      
+      (send (send this get-parent)
+            get-sections))
+
+    (define/public
       (add-button name template clear)
       
       (send (car inner-rows)
