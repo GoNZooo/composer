@@ -20,6 +20,7 @@
            [parent #f]
            [name name]
            [parent-row (send this get-parent)]
+           [edited-button this]
            [label "Edit button"]
            [template template]
            [clear clear]
