@@ -13,6 +13,15 @@
     (define (move direction)
       (send (send this get-parent) move-child this direction))
 
+    (define inner-edit-button-dialog
+      (new edit-button-dialog%
+           [parent this]
+           [button-name (send this get-label)]
+           [template template]
+           [clear clear]
+           [sections (send (send this get-parent)
+                           get-sections)]))
+
     (define/override
       (on-subwindow-event receiver event)
 
@@ -30,14 +39,8 @@
                       'left-down)
               (send event get-shift-down)
               (send event get-control-down))
-         (new edit-button-dialog%
-              [parent this]
-              [button-name (send this get-label)]
-              [template template]
-              [clear clear]
-              [sections (send (send this get-parent)
-                              get-sections)]
-              [show #t])]
+         (send inner-edit-button-dialog
+               show #t)]
         [else #f]))
 
     (define/public

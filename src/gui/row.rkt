@@ -69,7 +69,8 @@
       
       (set! inner-buttons
         (for/list ([b inner-buttons])
-          (not (equal? b button)))))
+          (not (equal? b button))))
+      (set-children inner-buttons))
 
     (define (move direction)
       (send (send this get-parent) move-child this direction))
