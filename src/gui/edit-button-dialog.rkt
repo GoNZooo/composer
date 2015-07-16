@@ -45,11 +45,11 @@
            [label "Edit"]
            [callback
              (lambda (button event)
-               (send (send this get-parent)
+               (send parent-row
                      add-button
                      (send section-combo-field get-value)
                      (send name-field get-value)
                      (send template-field get-value)
                      (send clear-check-box get-value))
-               (send (send this get-parent)
+               (send parent-row
                      remove-button edited-button))]))))

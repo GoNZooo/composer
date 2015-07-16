@@ -17,8 +17,9 @@
 
     (define inner-edit-button-dialog
       (new edit-button-dialog%
-           [parent (send this get-parent)]
+           [parent #f]
            [name name]
+           [parent-row (send this (get-parent))]
            [label "Edit button"]
            [template template]
            [clear clear]
