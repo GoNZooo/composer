@@ -44,10 +44,17 @@
             section))
 
     (define/public
-      (add-section name)
+      (add-section name rows)
       
       (send template-content-panel
             add-section
             name))
+
+    (define/public
+      (remove-section section)
+      
+      (send template-content-panel
+            remove-section
+            section))
 
     (super-new)))

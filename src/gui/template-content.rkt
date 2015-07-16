@@ -64,16 +64,26 @@
             add-row))
 
     (define/public
-      (add-section name)
+      (add-section name rows)
       
       (set! inner-sections
         (cons (new section%
                    [parent this]
                    [section-label name]
-                   [rows '((rows (row ())))])
+                   [rows rows])
               inner-sections))
       
       (set-sections inner-sections))
+
+    (define/public
+      (remove-section section)
+      
+      (set! inner-sections
+        (filter (lambda (s)
+                  (not (eqv? s
+                             section)))
+                inner-sections))
+      (set-sections inner-section))
 
     (define/public
       (serialize)

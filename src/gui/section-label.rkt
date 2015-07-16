@@ -13,10 +13,24 @@
                                [parent this]
                                [label label]))
 
+    (define inner-edit-row-dialog #f)
+
     (define/override
       (on-subwindow-event receiver event)
 
       (cond
+        [(and (edit-mode)
+              (equal? (send event get-event-type)
+                      'left-down)
+              (send event get-control-down)
+              (send event get-shift-down))
+         (set! inner-edit-section-dialog 
+             (new edit-row-dialog%
+                  [parent #f]
+                  [edited-section (send this get-parent)]
+                  [label "Edit section"]
+                  [top-level-window (send this get-top-level-window)]
+                  [rows (caddr (send serialize (send this get-parent)))]))]
         [(and (edit-mode)
               (equal? (send event get-event-type)
                       'left-down)

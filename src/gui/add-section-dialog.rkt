@@ -18,7 +18,7 @@
              (lambda (button event)
                (send (send this get-parent)
                      add-section
-                     (send name-field get-value)))]))
-    ))
+                     (send name-field get-value)
+                     '((rows (row ())))))]))))
 
 
