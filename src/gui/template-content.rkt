@@ -11,6 +11,7 @@
     (super-new)
 
     (init sections)
+    (field [inner-sections '()])
 
     (define (init-sections sections)
       (map (lambda (s)
@@ -20,7 +21,7 @@
                   [rows (cddr s)]))
            sections))
 
-    (define inner-sections (init-sections sections))
+    (set! inner-sections (init-sections sections))
     
     (define (set-sections cs)
       (set! inner-sections cs)
