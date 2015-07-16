@@ -1,6 +1,7 @@
 #lang racket/gui
 
-(require "../parameters.rkt")
+(require "../parameters.rkt"
+         "edit-button-dialog.rkt")
 
 (provide movable-button%)
 (define movable-button%
