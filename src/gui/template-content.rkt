@@ -21,7 +21,12 @@
                   [rows (cddr s)]))
            sections))
 
-    (define inner-sections (init-sections sections))
+    (define (set-children cs)
+      (set! inner-sections cs)
+      (send this
+            change-children
+            (lambda (children)
+              inner-sections)))
 
     (define (set-children cs)
       (send this
