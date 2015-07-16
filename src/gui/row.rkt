@@ -71,8 +71,10 @@
       (remove-button button)
       
       (set! inner-buttons
-        (for/list ([b inner-buttons])
-          (not (equal? b button))))
+        (filter (lambda (b)
+                  (not (equal? b
+                               button)))
+                inner-buttons))
       (set-children inner-buttons))
 
     (define (move direction)
