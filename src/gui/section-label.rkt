@@ -32,7 +32,10 @@
                   [edited-section (send this get-parent)]
                   [label "Edit section"]
                   [top-level-window (send this get-top-level-window)]
-                  [rows (caddr (send (send this get-parent) serialize))]))]
+                  [rows (caddr (send (send this get-parent) serialize))]))
+         (send inner-edit-section-dialog
+               show
+               #t)]
         [(and (edit-mode)
               (equal? (send event get-event-type)
                       'left-down)
