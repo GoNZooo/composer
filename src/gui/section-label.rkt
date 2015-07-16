@@ -28,6 +28,7 @@
          (set! inner-edit-section-dialog 
              (new edit-section-dialog%
                   [parent #f]
+                  [name label]
                   [edited-section (send this get-parent)]
                   [label "Edit section"]
                   [top-level-window (send this get-top-level-window)]
