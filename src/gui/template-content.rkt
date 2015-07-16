@@ -10,21 +10,7 @@
   (class vertical-panel%
     (super-new)
 
-    (init-field sections)
-
-    (define (set-children cs)
-      (send this
-            change-children
-            (lambda (children)
-              cs)))
-
-    (define (make-sections sections)
-      (set-children (map (lambda (s)
-                           (new section%
-                                [parent this]
-                                [section-label (cadr s)]
-                                [rows (cddr s)]))
-                         sections)))
+    (init sections)
 
     (define (init-sections sections)
       (map (lambda (s)
@@ -35,6 +21,12 @@
            sections))
 
     (define inner-sections (init-sections sections))
+
+    (define (set-children cs)
+      (send this
+            change-children
+            (lambda (children)
+              cs)))
 
     (define/public
       (get-sections)
