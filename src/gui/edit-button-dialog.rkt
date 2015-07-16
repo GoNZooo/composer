@@ -45,7 +45,7 @@
            [label "Edit"]
            [callback
              (lambda (button event)
-               (send parent-row
+               (send (send this get-top-level-window)
                      add-button
                      (send section-combo-field get-value)
                      (send name-field get-value)
