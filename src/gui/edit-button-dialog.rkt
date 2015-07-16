@@ -17,8 +17,7 @@
            [parent this]
            [choices (map (lambda (s)
                            (send s get-section-label))
-                         (send (send this get-parent)
-                               get-sections))]
+                         sections)]
            [label "Section"]))
     
     (define name-field
