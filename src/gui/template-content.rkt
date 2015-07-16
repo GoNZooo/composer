@@ -20,8 +20,8 @@
                   [rows (cddr s)]))
            sections))
 
-    (field [inner-sections (init-sections sections)])
-
+    (define inner-sections (init-sections sections))
+    
     (define (set-sections cs)
       (set! inner-sections cs)
       (send this
