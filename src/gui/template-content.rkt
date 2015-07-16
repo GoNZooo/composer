@@ -28,12 +28,6 @@
             (lambda (children)
               inner-sections)))
 
-    (define (set-children cs)
-      (send this
-            change-children
-            (lambda (children)
-              cs)))
-
     (define/public
       (get-sections)
       
