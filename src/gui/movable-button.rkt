@@ -19,6 +19,7 @@
       (new edit-button-dialog%
            [parent this]
            [name name]
+           [label "Edit button"]
            [template template]
            [clear clear]
            [sections (send (send this get-parent)
