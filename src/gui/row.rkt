@@ -61,6 +61,7 @@
       (set! inner-buttons (cons (new movable-button%
                                      [parent this]
                                      [label name]
+                                     [name name]
                                      [template template]
                                      [clear clear])
                                 inner-buttons))
