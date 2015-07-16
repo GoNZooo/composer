@@ -48,7 +48,8 @@
       
       (send template-content-panel
             add-section
-            name))
+            name
+            rows))
 
     (define/public
       (remove-section section)
