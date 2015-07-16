@@ -70,8 +70,6 @@
     (define/public
       (remove-button button)
 
-      (printf "~a ~a" button inner-buttons)
-      
       (set! inner-buttons
         (filter (lambda (b)
                   (not (eqv? b
