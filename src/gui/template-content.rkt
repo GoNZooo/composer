@@ -18,11 +18,6 @@
             (lambda (children)
               cs)))
 
-    (define/public
-      (get-sections)
-      
-      inner-sections)
-
     (define (make-sections sections)
       (set-children (map (lambda (s)
                            (new section%
@@ -40,6 +35,11 @@
            sections))
 
     (define inner-sections (init-sections sections))
+
+    (define/public
+      (get-sections)
+      
+      inner-sections)
 
     (define/public
       (move-child child direction)
