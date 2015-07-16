@@ -24,7 +24,7 @@
            [label "Edit button"]
            [template template]
            [clear clear]
-           [sections (send (send this get-parent)
+           [sections (send parent-row
                            get-sections)]))
 
     (define/override
