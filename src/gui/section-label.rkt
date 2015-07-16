@@ -26,7 +26,7 @@
               (send event get-control-down)
               (send event get-shift-down))
          (set! inner-edit-section-dialog 
-             (new edit-row-dialog%
+             (new edit-section-dialog%
                   [parent #f]
                   [edited-section (send this get-parent)]
                   [label "Edit section"]
