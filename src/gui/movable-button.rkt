@@ -6,6 +6,7 @@
 (provide movable-button%)
 (define movable-button%
   (class button%
+    (super-new)
 
     (init-field clear
                 template
@@ -50,12 +51,12 @@
 
     (define/public
       (get-button-label)
-      
+
       (send this get-label))
 
     (define/public
       (remove-self)
-      
+
       (send (send this get-parent)
             remove-button
             this))
@@ -65,6 +66,4 @@
 
       (if clear
         `(button ,(send this get-label) ,template clear)
-        `(button ,(send this get-label) ,template)))
-
-    (super-new)))
+        `(button ,(send this get-label) ,template)))))
