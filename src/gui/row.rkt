@@ -69,11 +69,13 @@
 
     (define/public
       (remove-button button)
+
+      (printf "~a ~a" button inner-buttons)
       
       (set! inner-buttons
         (filter (lambda (b)
-                  (not (equal? b
-                               button)))
+                  (not (eqv? b
+                             button)))
                 inner-buttons))
       (set-children inner-buttons))
 
