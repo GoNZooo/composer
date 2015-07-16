@@ -55,7 +55,8 @@
       (set! inner-rows
         (cons (new row%
                    [parent this]
-                   [buttons '()])
+                   [buttons '()]
+                   [alignment '(center top)])
               inner-rows))
       
       (set-children inner-rows))
