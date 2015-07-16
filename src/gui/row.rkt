@@ -84,12 +84,14 @@
         [(and (edit-mode)
               (equal? (send event get-event-type)
                       'left-down)
-              (send event get-shift-down))
+              (send event get-shift-down)
+              (not (send event get-control-down)))
          (move 'left)]
         [(and (edit-mode)
               (equal? (send event get-event-type)
                       'right-down)
-              (send event get-shift-down))
+              (send event get-shift-down)
+              (not (send event get-control-down)))
          (move 'right)]
         [else #f]))
 
