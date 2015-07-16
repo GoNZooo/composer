@@ -16,7 +16,7 @@
     (define inner-edit-button-dialog
       (new edit-button-dialog%
            [parent this]
-           [button-name (send this get-label)]
+           [button-name (send this get-button-label)]
            [template template]
            [clear clear]
            [sections (send (send this get-parent)
@@ -46,6 +46,11 @@
     (define/public
       (get-template)
       template)
+
+    (define/public
+      (get-button-label)
+      
+      (send this get-label))
 
     (define/public
       (remove-self)
