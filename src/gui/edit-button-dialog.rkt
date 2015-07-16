@@ -5,7 +5,7 @@
   (class dialog%
     (super-new)
     
-    (init button-name
+    (init name
           template
           clear
           sections)

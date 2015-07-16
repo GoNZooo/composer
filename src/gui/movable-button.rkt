@@ -8,7 +8,8 @@
   (class button%
 
     (init-field clear
-                template)
+                template
+                name)
 
     (define (move direction)
       (send (send this get-parent) move-child this direction))
@@ -16,7 +17,7 @@
     (define inner-edit-button-dialog
       (new edit-button-dialog%
            [parent this]
-           [button-name (send this get-button-label)]
+           [name name]
            [template template]
            [clear clear]
            [sections (send (send this get-parent)

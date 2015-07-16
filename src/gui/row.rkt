@@ -24,12 +24,14 @@
            (new movable-button%
                 [parent this]
                 [label name]
+                [name name]
                 [template text]
                 [clear #t])]
           [(list 'button name text)
            (new movable-button%
                 [parent this]
                 [label name]
+                [name name]
                 [template text]
                 [clear #f])]
           ['() '()]))
