@@ -32,8 +32,10 @@
            [label "Remove"]
            [callback
              (lambda (button event)
-               (send top-level-window
-                     remove-section edited-section))]))
+               (send (send edited-section
+                           get-parent)
+                     remove-section
+                     edited-section))]))
 
     (define add-row-button
       (new button%
