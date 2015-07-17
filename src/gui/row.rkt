@@ -2,7 +2,8 @@
 
 (require "../parameters.rkt"
          "parent-manipulation.rkt"
-         "movable-button.rkt")
+         "movable-button.rkt"
+         "edit-row-dialog.rkt")
 
 (provide row%)
 (define row%
