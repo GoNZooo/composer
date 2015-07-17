@@ -45,7 +45,7 @@
     (define name-clear-panel
       (new horizontal-panel%
            [parent button-vert-panel]
-           [alignment '(top center)]))
+           [alignment '(center top)]))
 
     (define name-field
       (new text-field%
@@ -73,7 +73,7 @@
     (define button-section-button-panel
       (new horizontal-panel%
            [parent main-vertical-panel]
-           [alignment '(top center)]))
+           [alignment '(center top)]))
     
     (define edit-button-button
       (new button%
