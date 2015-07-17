@@ -4,12 +4,12 @@
 (define edit-section-dialog%
   (class dialog%
     (super-new)
-    
+
     (init name
           edited-section
           top-level-window
           rows)
-    
+
     (define name-field
       (new text-field%
            [parent this]
@@ -22,13 +22,10 @@
            [label "Edit"]
            [callback
              (lambda (button event)
-               (send top-level-window
-                     add-section
-                     (send name-field get-value)
-                     rows)
-               (send top-level-window
-                     remove-section edited-section))]))
-    
+               (send edited-section
+                     set-section-label
+                     (send name-field get-value)))]))
+
     (define remove-section-button
       (new button%
            [parent this]
@@ -37,7 +34,7 @@
              (lambda (button event)
                (send top-level-window
                      remove-section edited-section))]))
-    
+
     (define add-row-button
       (new button%
            [parent this]
@@ -45,4 +42,29 @@
            [callback
              (lambda (button event)
                (send edited-section
-                     add-row))]))))
+                     add-row))]))
+    
+    (define section-move-panel
+      (new horizontal-panel%
+           [parent main-vertical-panel]
+           [alignment '(center top)]))
+
+    (define section-move-left-button
+      (new button%
+           [parent section-move-panel]
+           [label "^"]
+           [callback
+             (lambda (button event)
+               (send edited-row
+                     move
+                     'left))]))
+
+    (define section-move-right-button
+      (new button%
+           [parent section-move-panel]
+           [label "v"]
+           [callback
+             (lambda (button event)
+               (send edited-row
+                     move
+                     'right))]))))
