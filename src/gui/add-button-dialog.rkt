@@ -7,21 +7,47 @@
 
     (init parent-row)
 
+    (define main-vertical-panel
+      (new vertical-panel%
+           [parent this]
+           [alignment '(center top)]))
+
+    (define button-message
+      (new message%
+           [parent main-vertical-panel]
+           [label "Button settings"]))
+    
+    (define button-vert-panel
+      (new vertical-panel%
+           [parent main-vertical-panel]
+           [alignment '(center top)]))
+
+    (define name-clear-panel
+      (new horizontal-panel%
+           [parent button-vert-panel]
+           [alignment '(top center)]))
+
     (define name-field
       (new text-field%
-           [parent this]
-           [label "Button name:"]))
+           [parent name-clear-panel]
+           [label "Name"]
+           [style '(vertical-label)]))
 
     (define clear-check-box
       (new check-box%
-           [parent this]
-           [label "Clear clipboard before use:"]))
+           [parent name-clear-panel]
+           [label "Clear clipboard before use"]))
 
     (define template-field
       (new text-field%
-           [parent this]
-           [label "Template:"]
+           [parent main-vertical-panel]
+           [label "Template"]
            [style '(multiple)]))
+
+    (define button-section-button-panel
+      (new horizontal-panel%
+           [parent main-vertical-panel]
+           [alignment '(top center)]))
     
     (define add-button
       (new button%

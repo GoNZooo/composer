@@ -26,71 +26,58 @@
            [parent main-vertical-panel]
            [label "Button settings"]))
     
-    (define button-horizontal-panel
-      (new horizontal-panel%
+    (define button-vert-panel
+      (new vertical-panel%
            [parent main-vertical-panel]
            [alignment '(center top)]))
 
-    (define button-left-panel
-      (new vertical-panel%
-           [parent button-horizontal-panel]
-           [alignment '(center top)]))
-
-    (define button-right-panel
-      (new vertical-panel%
-           [parent button-horizontal-panel]
-           [alignment '(center top)]))
-
-    (define section-message
-      (new message%
-           [parent button-left-panel]
-           [label "Section:"]))
-
     (define section-combo-field
       (new combo-field%
-           [parent button-right-panel]
+           [parent button-vert-panel]
            [choices (map (lambda (s)
                            (send s get-section-label))
                          sections)]
-           [label #f]
+           [label "Section"]
+           [style '(vertical-label)]
            [init-value (send edited-button
                              get-section)]))
 
-    (define name-message
-      (new message%
-           [parent button-left-panel]
-           [label "Button name:"]))
+    (define name-clear-panel
+      (new horizontal-panel%
+           [parent button-vert-panel]
+           [alignment '(top center)]))
 
     (define name-field
       (new text-field%
-           [parent button-right-panel]
-           [label #f]
+           [parent name-clear-panel]
+           [label "Name"]
+           [style '(vertical-label)]
            [init-value (send edited-button
                              get-button-label)]))
 
-    (define clear-message
-      (new message%
-           [parent button-left-panel]
-           [label "Clear clipboard before use:"]))
-
     (define clear-check-box
       (new check-box%
-           [parent button-right-panel]
-           [label ""]
+           [parent name-clear-panel]
+           [label "Clear clipboard before use"]
            [value (send edited-button
                         get-clear)]))
 
     (define template-field
       (new text-field%
            [parent main-vertical-panel]
-           [label "Template:"]
+           [label "Template"]
            [style '(multiple)]
            [init-value (send edited-button
                              get-template)]))
+
+    (define button-section-button-panel
+      (new horizontal-panel%
+           [parent main-vertical-panel]
+           [alignment '(top center)]))
     
     (define edit-button-button
       (new button%
-           [parent main-vertical-panel]
+           [parent button-section-button-panel]
            [label "Edit"]
            [callback
              (lambda (button event)
@@ -128,7 +115,7 @@
     
     (define remove-button-button
       (new button%
-           [parent main-vertical-panel]
+           [parent button-section-button-panel]
            [label "Remove"]
            [callback
              (lambda (button event)
@@ -140,14 +127,14 @@
            [parent main-vertical-panel]
            [label "Row settings"]))
 
-    (define row-panel
+    (define row-section-button-panel
       (new horizontal-panel%
            [parent main-vertical-panel]
            [alignment '(center top)]))
     
     (define remove-row-button
       (new button%
-           [parent row-panel]
+           [parent row-section-button-panel]
            [label "Remove"]
            [callback
              (lambda (button event)
@@ -158,7 +145,7 @@
     
     (define add-button-button
       (new button%
-           [parent row-panel]
+           [parent row-section-button-panel]
            [label "Add button"]
            [callback
              (lambda (button event)
