@@ -36,6 +36,7 @@
                (set! add-button-dialog
                  (new add-button-dialog%
                       [parent this]
+                      [label "Add button"]
                       [parent-row edited-row]))
                (send add-button-dialog
                      show
