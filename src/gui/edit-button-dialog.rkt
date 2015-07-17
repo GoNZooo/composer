@@ -116,6 +116,29 @@
              (lambda (button event)
                (send (send edited-button get-parent)
                      remove-button edited-button))]))
+
+    (define button-section-move-panel
+      (new horizontal-panel%
+           [parent main-vertical-panel]
+           [alignment '(center top)]))
+
+    (define button-move-left-button
+      (new button%
+           [parent button-section-move-panel]
+           [label "<-"]
+           [callback
+             (lambda (button event)
+               (send edited-button
+                     move-left))]))
+
+    (define button-move-right-button
+      (new button%
+           [parent button-section-move-panel]
+           [label "->"]
+           [callback
+             (lambda (button event)
+               (send edited-button
+                     move-right))]))
     
     (define row-message
       (new message%
