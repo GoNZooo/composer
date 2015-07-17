@@ -74,11 +74,11 @@
       (copy-to-clipboard timestamp)
       
       (if clear
-        (send the-clipboard
+        (send the-x-selection-clipboard
               set-clipboard-string
               template
               timestamp)
-        (let ([current-content (send the-clipboard
+        (let ([current-content (send the-x-selection-clipboard
                                      get-clipboard-string
                                      timestamp)])
           (string-append (ensure-newlines current-content)
