@@ -10,15 +10,20 @@
     (init edited-row)
 
     (define add-button-dialog #f)
-    
-    (define horiz-main-panel
-      (new horizontal-panel%
+
+    (define main-vertical-panel
+      (new vertical-panel%
            [parent this]
+           [alignment '(center top)]))
+    
+    (define button-panel
+      (new horizontal-panel%
+           [parent main-vertical-panel]
            [alignment '(center top)]))
     
     (define remove-row-button
       (new button%
-           [parent this]
+           [parent button-panel]
            [label "Remove"]
            [callback
              (lambda (button event)
@@ -29,7 +34,7 @@
     
     (define add-button-button
       (new button%
-           [parent this]
+           [parent button-panel]
            [label "Add button"]
            [callback
              (lambda (button event)
