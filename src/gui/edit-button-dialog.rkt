@@ -12,6 +12,8 @@
     (define edited-row (send edited-button
                              get-parent))
 
+    (define add-button-dialog #f)
+
     (define main-vertical-panel
       (new vertical-panel%
            [parent this]
