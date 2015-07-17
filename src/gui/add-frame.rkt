@@ -50,18 +50,6 @@
            [parent this]
            [label "Add section"]))
 
-    (define add-button-button
-      (new button%
-           [label "Add"]
-           [parent this]
-           [callback
-             (lambda (button event)
-               (case (send type-radio-box get-selection)
-                 [(0) (send add-button-dialog show #t)]
-                 [(1) (send add-row-dialog show #t)]
-                 [(2) (send add-section-dialog show #t)]
-                 [else #f]))]))
-    
     (define/public
       (add-done)
       
