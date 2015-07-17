@@ -11,6 +11,8 @@
 
     (init buttons)
 
+    (define inner-edit-row-dialog #f)
+
     (define (set-children cs)
       (send this
             change-children
