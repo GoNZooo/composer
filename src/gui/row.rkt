@@ -29,14 +29,26 @@
                 [label name]
                 [name name]
                 [template text]
-                [clear #t])]
+                [clear #t]
+                [callback
+                  (lambda (button event)
+                    (send button
+                          copy-to-clipboard
+                          (send event
+                                get-time-stamp)))])]
           [(list 'button name text)
            (new movable-button%
                 [parent this]
                 [label name]
                 [name name]
                 [template text]
-                [clear #f])]
+                [clear #f]
+                [callback
+                  (lambda (button event)
+                    (send button
+                          copy-to-clipboard
+                          (send event
+                                get-time-stamp)))])]
           ['() '()]))
 
       (map make-button bs))
@@ -74,8 +86,6 @@
                                      [template template]
                                      [callback
                                        (lambda (button event)
-                                         (printf "callback to ~a~n"
-                                                 button)
                                          (send button
                                                copy-to-clipboard
                                                (send event
