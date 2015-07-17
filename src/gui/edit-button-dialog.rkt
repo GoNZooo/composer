@@ -132,8 +132,9 @@
                      remove-button edited-button))]))
     
     (define row-message
-      [parent main-vertical-panel]
-      [label "Row settings"])
+      (new message%
+           [parent main-vertical-panel]
+           [label "Row settings"]))
 
     (define row-panel
       (new horizontal-panel%
