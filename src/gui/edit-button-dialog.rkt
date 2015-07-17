@@ -42,14 +42,9 @@
            [init-value (send edited-button
                              get-section)]))
 
-    (define name-clear-panel
-      (new horizontal-panel%
-           [parent button-vert-panel]
-           [alignment '(center top)]))
-
     (define name-field
       (new text-field%
-           [parent name-clear-panel]
+           [parent main-vertical-panel]
            [label "Name"]
            [style '(single vertical-label)]
            [init-value (send edited-button
@@ -57,7 +52,7 @@
 
     (define clear-check-box
       (new check-box%
-           [parent name-clear-panel]
+           [parent main-vertical-panel]
            [label "Clear clipboard before use"]
            [value (send edited-button
                         get-clear)]))
