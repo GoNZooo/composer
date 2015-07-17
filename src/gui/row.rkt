@@ -75,7 +75,9 @@
                                      [callback
                                        (lambda (button event)
                                          (send button
-                                               copy-to-clipboard))]
+                                               copy-to-clipboard
+                                               (send event
+                                                     get-timestamp)))]
                                      [clear clear])
                                 inner-buttons))
       (set-children inner-buttons))
