@@ -61,11 +61,14 @@
 
       (set! inner-buttons
         (case direction
-          [(left) (move-left child
-                             inner-buttons)]
-          [(right) (move-right child
-                               inner-buttons)]
-          [else #f]))
+          [(left)
+           (move-left child
+                      inner-buttons)]
+          [(right)
+           (move-right child
+                       inner-buttons)]
+          [else
+            #f]))
       (set-children inner-buttons))
 
     (define/public
