@@ -32,6 +32,8 @@
                 [clear #t]
                 [callback
                   (lambda (button event)
+                    (printf "~a~n"
+                            button)
                     (send button
                           copy-to-clipboard
                           (send event
@@ -45,53 +47,64 @@
                 [clear #f]
                 [callback
                   (lambda (button event)
+                    (printf "~a~n"
+                            button)
                     (send button
                           copy-to-clipboard
                           (send event
                                 get-time-stamp)))])]
           ['() '()]))
 
-      (map make-button bs))
+      (map make-button
+           bs))
 
     (define inner-buttons (make-buttons buttons))
 
     (define/public
       (move-child child direction)
 
-      (set! inner-buttons (case direction
-                            [(left) (move-left child inner-buttons)]
-                            [(right) (move-right child inner-buttons)]
-                            [else #f]))
+      (set! inner-buttons
+        (case direction
+          [(left) (move-left child
+                             inner-buttons)]
+          [(right) (move-right child
+                               inner-buttons)]
+          [else #f]))
       (set-children inner-buttons))
 
     (define/public
       (get-sections)
       
-      (send (send this get-parent)
+      (send (send this
+                  get-parent)
             get-sections))
 
     (define/public
       (get-section)
       
-      (send (send this get-parent)
+      (send (send this
+                  get-parent)
             get-section))
 
     (define/public
       (add-button name template clear)
       
-      (set! inner-buttons (cons (new movable-button%
-                                     [parent this]
-                                     [label name]
-                                     [name name]
-                                     [template template]
-                                     [callback
-                                       (lambda (button event)
-                                         (send button
-                                               copy-to-clipboard
-                                               (send event
-                                                     get-time-stamp)))]
-                                     [clear clear])
-                                inner-buttons))
+      (set! inner-buttons
+        (cons (new movable-button%
+                   [parent this]
+                   [label name]
+                   [name name]
+                   [template template]
+                   [callback
+                     (lambda (button event)
+                       (printf "~a~n"
+                               button)
+                       (send button
+                             copy-to-clipboard
+                             (send event
+                                   get-time-stamp)))]
+                   [clear clear])
+              inner-buttons))
       (set-children inner-buttons))
 
     (define/public
@@ -107,16 +120,23 @@
     (define/public
       (move direction)
 
-      (send (send this get-parent) move-child this direction))
+      (send (send this
+                  get-parent)
+            move-child
+            this
+            direction))
 
     (define/override
       (on-subwindow-event receiver event)
 
       (cond
         [(and (edit-mode)
-              (equal? inner-buttons '())
-              (send event get-shift-down)
-              (send event get-control-down))
+              (equal? inner-buttons
+                      '())
+              (send event
+                    get-shift-down)
+              (send event
+                    get-control-down))
          (begin
            (set! inner-edit-row-dialog
              (new edit-row-dialog%
@@ -131,6 +151,9 @@
     (define/public
       (serialize)
 
-      (cons 'row (map (lambda (child)
-                        (send child serialize))
-                      (send this get-children))))))
+      (cons 'row
+            (map (lambda (child)
+                   (send child
+                         serialize))
+                 (send this
+                       get-children))))))
