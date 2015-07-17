@@ -7,6 +7,11 @@
 
     (init edited-section)
 
+    (define main-vertical-panel
+      (new vertical-panel%
+           [parent this]
+           [alignment '(center top)]))
+
     (define name-field
       (new text-field%
            [parent this]
