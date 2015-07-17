@@ -54,6 +54,34 @@
 
       template)
 
+    (define (ensure-newlines str)
+      (cond
+        [(equal? (substring str
+                            (- (string-length str)
+                               2))
+                 "\n\n")
+         str]
+        [(equal? (substring str
+                            (sub1 (string-length str)))
+                 "\n")
+         (string-append str
+                        "\n")]
+        [else
+          (string-append str
+                         "\n\n")]))
+
+    (define/public
+      (copy-to-clipboard)
+      
+      (if clear
+        (send the-clipboard
+              set-clipboard-string
+              template)
+        (let ([current-content (send the-clipboard
+                                     get-clipboard-string)])
+          (string-append (ensure-newlines current-content)
+                         template))))
+
     (define/public
       (get-button-label)
 

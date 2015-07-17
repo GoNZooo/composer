@@ -72,6 +72,10 @@
                                      [label name]
                                      [name name]
                                      [template template]
+                                     [callback
+                                       (lambda (button event)
+                                         (send button
+                                               copy-to-clipboard))]
                                      [clear clear])
                                 inner-buttons))
       (set-children inner-buttons))
