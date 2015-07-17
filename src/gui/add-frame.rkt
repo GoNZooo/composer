@@ -32,8 +32,7 @@
     (define type-radio-box
       (new radio-box%
            [label "Type of item"]
-           [choices '("Button"
-                      "Row"
+           [choices '("Row"
                       "Section")]
            [parent this]
            [style '(vertical
