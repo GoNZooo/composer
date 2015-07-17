@@ -12,7 +12,9 @@
                 template
                 name)
 
-    (define (move direction)
+    (define/public
+      (move direction)
+
       (send (send this get-parent) move-child this direction))
 
     (define inner-edit-button-dialog #f)
