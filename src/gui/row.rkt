@@ -131,6 +131,9 @@
 
       (cond
         [(and (edit-mode)
+              (equal? (send event
+                            get-event-type)
+                      'left-down)
               (equal? inner-buttons
                       '())
               (send event
