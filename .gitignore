@@ -1,2 +1,2 @@
 *.swp
-src/components.blob*
+src/*.blob*
