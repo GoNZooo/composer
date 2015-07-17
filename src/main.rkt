@@ -25,19 +25,19 @@
          [label "Add section"]))
 
   (btn edit-mode-switch built-in-panel "Edit-mode"
-       (lambda (b e)
+       (lambda (button event)
          (edit-mode (not (edit-mode)))))
 
   (btn iconize-window built-in-panel "Iconize window"
-       (lambda (b e)
+       (lambda (button event)
          (send built-in-panel iconize #t)))
 
   (btn clear-clipboard built-in-panel "Clear clipboard"
-       (lambda (b e)
-         (send the-clipboard
+       (lambda (button event)
+         (send the-x-selection-clipboard
                set-clipboard-string
                ""
-               (send e get-time-stamp))))
+               (send event get-time-stamp))))
 
   (btn add-button built-in-panel "Add section"
        (lambda (b e)
