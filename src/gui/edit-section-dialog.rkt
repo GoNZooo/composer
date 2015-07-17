@@ -11,7 +11,8 @@
       (new text-field%
            [parent this]
            [label "Section name:"]
-           [init-value name]))
+           [init-value (send edited-section
+                             get-section-label)]))
 
     (define edit-section-button
       (new button%
@@ -21,7 +22,8 @@
              (lambda (button event)
                (send edited-section
                      set-section-label
-                     (send name-field get-value)))]))
+                     (send name-field
+                           get-value)))]))
 
     (define remove-section-button
       (new button%
