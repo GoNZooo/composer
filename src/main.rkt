@@ -34,7 +34,7 @@
 
   (btn clear-clipboard built-in-panel "Clear clipboard"
        (lambda (button event)
-         (send the-x-selection-clipboard
+         (send the-clipboard
                set-clipboard-string
                ""
                (send event get-time-stamp))))
