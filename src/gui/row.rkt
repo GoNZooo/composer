@@ -86,7 +86,9 @@
                 inner-buttons))
       (set-children inner-buttons))
 
-    (define (move direction)
+    (define/public
+      (move direction)
+
       (send (send this get-parent) move-child this direction))
 
     (define/override

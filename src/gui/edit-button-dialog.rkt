@@ -176,4 +176,31 @@
                       [label "Add button"]))
                (send add-button-dialog
                      show
-                     #t))]))))
+                     #t))]))
+
+    (define row-section-move-panel
+      (new horizontal-panel%
+           [parent main-vertical-panel]
+           [alignment '(center top)]))
+
+    (define row-move-left-button
+      (new button%
+           [parent row-section-move-panel]
+           [label "^"]
+           [callback
+             (lambda (button event)
+               (send edited-row
+                     move
+                     'left))]))
+
+    (define row-move-right-button
+      (new button%
+           [parent row-section-move-panel]
+           [label "v"]
+           [callback
+             (lambda (button event)
+               (send edited-row
+                     move
+                     'right))]))
+    
+    ))
