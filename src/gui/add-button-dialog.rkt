@@ -31,7 +31,7 @@
       (new text-field%
            [parent name-clear-panel]
            [label "Name"]
-           [style '(vertical-label)]))
+           [style '(single vertical-label)]))
 
     (define clear-check-box
       (new check-box%

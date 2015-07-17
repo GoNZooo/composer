@@ -51,7 +51,7 @@
       (new text-field%
            [parent name-clear-panel]
            [label "Name"]
-           [style '(vertical-label)]
+           [style '(single vertical-label)]
            [init-value (send edited-button
                              get-button-label)]))
 
