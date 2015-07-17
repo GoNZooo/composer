@@ -7,7 +7,7 @@
          "parameters.rkt"
          "loader.rkt"
          "gui/auto-save-frame.rkt"
-         "gui/add-frame.rkt")
+         "gui/add-section-dialog.rkt")
 
 (define (main-window)
   (define top-frame (new auto-save-frame%
@@ -18,6 +18,11 @@
   (define built-in-panel (new horizontal-panel%
                               [parent top-frame]
                               [alignment '(center top)]))
+
+  (define add-section-dialog
+    (new add-section-dialog%
+         [parent this]
+         [label "Add section"]))
 
   (btn edit-mode-switch built-in-panel "Edit-mode"
        (lambda (b e)
@@ -34,9 +39,9 @@
                ""
                (send e get-time-stamp))))
 
-  (btn add-button built-in-panel "Add component"
+  (btn add-button built-in-panel "Add section"
        (lambda (b e)
-         (send add-dialog show #t)))
+         (send add-section-dialog show #t)))
 
   (define template-content-panel (make-components (call-with-input-file
                                                     "components.blob"
@@ -45,14 +50,6 @@
   (send top-frame
         set-template-content-panel
         template-content-panel)
-
-  (define add-dialog (new add-dialog%
-                          [label "Add component"]
-                          [parent top-frame]
-                          [sections
-                            (send (send top-frame
-                                        get-template-content-panel)
-                                  get-sections)]))
 
   (define (components)
     (serialize-object template-content-panel))
