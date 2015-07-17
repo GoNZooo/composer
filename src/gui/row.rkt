@@ -32,8 +32,6 @@
                 [clear #t]
                 [callback
                   (lambda (button event)
-                    (printf "~a~n"
-                            button)
                     (send button
                           copy-to-clipboard
                           (send event
@@ -47,8 +45,6 @@
                 [clear #f]
                 [callback
                   (lambda (button event)
-                    (printf "~a~n"
-                            button)
                     (send button
                           copy-to-clipboard
                           (send event
@@ -97,8 +93,6 @@
                    [template template]
                    [callback
                      (lambda (button event)
-                       (printf "~a~n"
-                               button)
                        (send button
                              copy-to-clipboard
                              (send event
