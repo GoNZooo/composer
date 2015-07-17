@@ -129,7 +129,8 @@
            [callback
              (lambda (button event)
                (send edited-button
-                     move-left))]))
+                     move
+                     'left))]))
 
     (define button-move-right-button
       (new button%
@@ -138,7 +139,8 @@
            [callback
              (lambda (button event)
                (send edited-button
-                     move-right))]))
+                     move
+                     'right))]))
     
     (define row-message
       (new message%
