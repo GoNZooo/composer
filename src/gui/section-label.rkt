@@ -29,7 +29,7 @@
              (new edit-section-dialog%
                   [parent #f]
                   [edited-section (send this get-parent)]
-                  [label "Edit section"]
+                  [label "Edit section"]))
          (send inner-edit-section-dialog
                show
                #t)]
