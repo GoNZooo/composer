@@ -3,9 +3,9 @@
   "Docs (1)"
   (rows
    (row
-    (button "CCs" "Need CCs again")
-    (button "ID" "Need ID")
-    (button "POA" "Need POA also"))
+    (button "ID" "- ID")
+    (button "POA" "- POA")
+    (button "CCs" "- CCs bla bla instructions for CCs"))
    (row (button "Docs requirements" "Here are the docs requirements"))))
  (section
   "WDs"
