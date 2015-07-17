@@ -6,6 +6,8 @@
     (super-new)
 
     (init edited-row)
+
+    (define add-button-dialog #f)
     
     (define horiz-main-panel
       (new horizontal-panel%
