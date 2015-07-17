@@ -14,14 +14,19 @@
 
     (define name-field
       (new text-field%
-           [parent this]
+           [parent main-vertical-panel]
            [label "Section name:"]
            [init-value (send edited-section
                              get-section-label)]))
 
+    (define button-panel
+      (new horizontal-panel%
+           [parent main-vertical-panel]
+           [alignment '(center top)]))
+
     (define edit-section-button
       (new button%
-           [parent this]
+           [parent button-panel]
            [label "Edit"]
            [callback
              (lambda (button event)
@@ -32,7 +37,7 @@
 
     (define remove-section-button
       (new button%
-           [parent this]
+           [parent button-panel]
            [label "Remove"]
            [callback
              (lambda (button event)
@@ -43,7 +48,7 @@
 
     (define add-row-button
       (new button%
-           [parent this]
+           [parent button-panel]
            [label "Add row"]
            [callback
              (lambda (button event)
