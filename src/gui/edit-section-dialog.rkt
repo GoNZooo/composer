@@ -5,10 +5,7 @@
   (class dialog%
     (super-new)
 
-    (init name
-          edited-section
-          top-level-window
-          rows)
+    (init edited-section)
 
     (define name-field
       (new text-field%
@@ -57,7 +54,7 @@
            [label "^"]
            [callback
              (lambda (button event)
-               (send edited-row
+               (send edited-section
                      move
                      'left))]))
 
@@ -67,6 +64,6 @@
            [label "v"]
            [callback
              (lambda (button event)
-               (send edited-row
+               (send edited-section
                      move
                      'right))]))))
