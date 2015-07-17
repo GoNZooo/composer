@@ -16,6 +16,7 @@
              (new row%
                   [parent this]
                   [buttons (cdr r)]
+                  [min-height 25]
                   [alignment '(center top)]))
            rows))
 
@@ -43,6 +44,12 @@
             get-sections))
 
     (define/public
+      (get-section)
+      
+      (send (send this get-parent)
+            get-section-label))
+
+    (define/public
       (add-button name template clear)
       
       (send (car inner-rows)
@@ -56,9 +63,20 @@
         (cons (new row%
                    [parent this]
                    [buttons '()]
+                   [min-height 25]
                    [alignment '(center top)])
               inner-rows))
       
+      (set-children inner-rows))
+
+    (define/public
+      (remove-row row)
+      
+      (set! inner-rows
+        (filter (lambda (r)
+                  (not (eqv? row
+                             r)))
+                inner-rows))
       (set-children inner-rows))
 
     (define/public

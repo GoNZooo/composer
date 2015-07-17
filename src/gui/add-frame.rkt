@@ -1,7 +1,6 @@
 #lang racket/gui
 
-(require "add-button-dialog.rkt"
-         "add-row-dialog.rkt"
+(require "add-row-dialog.rkt"
          "add-section-dialog.rkt")
 
 (provide add-dialog%)
@@ -39,12 +38,6 @@
            [parent this]
            [style '(vertical
                      vertical-label)]))
-
-    (define add-button-dialog
-      (new add-button-dialog%
-           [parent this]
-           [label "Add button"]
-           [sections sections]))
 
     (define add-row-dialog
       (new add-row-dialog%

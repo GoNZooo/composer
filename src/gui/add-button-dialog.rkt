@@ -5,16 +5,8 @@
   (class dialog%
     (super-new)
 
-    (init-field sections)
+    (init parent-row)
 
-    (define section-combo-field
-      (new combo-field%
-           [parent this]
-           [choices (map (lambda (s)
-                           (send s get-section-label))
-                         sections)]
-           [label "Section"]))
-    
     (define name-field
       (new text-field%
            [parent this]
@@ -37,9 +29,8 @@
            [label "Add"]
            [callback
              (lambda (button event)
-               (send (send this get-parent)
+               (send parent-row
                      add-button
-                     (send section-combo-field get-value)
                      (send name-field get-value)
                      (send template-field get-value)
                      (send clear-check-box get-value)))]))))

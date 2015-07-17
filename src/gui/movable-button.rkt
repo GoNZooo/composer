@@ -29,13 +29,9 @@
          (begin
            (set! inner-edit-button-dialog
              (new edit-button-dialog%
-                  [parent #f]
-                  [name name]
-                  [parent-row (send this get-parent)]
-                  [edited-button this]
                   [label "Edit button"]
-                  [template template]
-                  [clear clear]
+                  [parent #f]
+                  [edited-button this]
                   [sections (send (send this get-parent)
                                   get-sections)]
                   [top-level-window (send this get-top-level-window)]))
@@ -53,12 +49,39 @@
 
     (define/public
       (get-template)
+
       template)
 
     (define/public
       (get-button-label)
 
       (send this get-label))
+
+    (define/public
+      (get-clear)
+      
+      clear)
+
+    (define/public
+      (get-section)
+      
+      (send (send this get-parent)
+            get-section))
+
+    (define/public
+      (set-name n)
+      
+      (set! name n))
+
+    (define/public
+      (set-template t)
+      
+      (set! template t))
+
+    (define/public
+      (set-clear c)
+      
+      (set! clear c))
 
     (define/public
       (serialize)

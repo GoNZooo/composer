@@ -21,6 +21,7 @@
     (define inner-section-rows (new section-rows%
                                     [parent this]
                                     [rows (cdar rows)]
+                                    [spacing 0]
                                     [alignment '(center top)]))
 
     (define/public

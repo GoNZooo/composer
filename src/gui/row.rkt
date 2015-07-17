@@ -56,6 +56,12 @@
             get-sections))
 
     (define/public
+      (get-section)
+      
+      (send (send this get-parent)
+            get-section))
+
+    (define/public
       (add-button name template clear)
       
       (set! inner-buttons (cons (new movable-button%
@@ -85,17 +91,17 @@
 
       (cond
         [(and (edit-mode)
-              (equal? (send event get-event-type)
-                      'left-down)
+              (equal? inner-buttons '())
               (send event get-shift-down)
-              (not (send event get-control-down)))
-         (move 'left)]
-        [(and (edit-mode)
-              (equal? (send event get-event-type)
-                      'right-down)
-              (send event get-shift-down)
-              (not (send event get-control-down)))
-         (move 'right)]
+              (send event get-control-down))
+         (begin
+           (set! inner-edit-row-dialog
+             (new edit-row-dialog%
+                  [parent this]
+                  [edited-row this]))
+           (send inner-edit-row-dialog
+                 show
+                 #t))]
         [else #f]))
 
     (define/public

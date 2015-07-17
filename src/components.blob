@@ -1,10 +1,16 @@
 (templates
  (section
-  "Docs"
+  "Docs (1)"
   (rows
    (row
+    (button "CCs" "Need CCs again")
     (button "ID" "Need ID")
-    (button "POA" "Need POA")
-    (button "CCs" "Need CCs"))
+    (button "POA" "Need POA also"))
    (row (button "Docs requirements" "Here are the docs requirements"))))
- (section "WDs" (rows (row (button "BT" "Information about BT WD")))))
+ (section
+  "WDs"
+  (rows
+   (row
+    (button "Skrill" "Info about Skrill WD")
+    (button "CC" "Info about CC WD"))
+   (row (button "BT" "Information about BT WD")))))
