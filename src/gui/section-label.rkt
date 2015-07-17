@@ -25,28 +25,14 @@
                       'left-down)
               (send event get-control-down)
               (send event get-shift-down))
-         (set! inner-edit-section-dialog 
-             (new edit-section-dialog%
-                  [parent #f]
-                  [edited-section (send this get-parent)]
-                  [label "Edit section"]))
-         (send inner-edit-section-dialog
-               show
-               #t)]
-        [(and (edit-mode)
-              (equal? (send event get-event-type)
-                      'left-down)
-              (send event get-control-down))
-         (send (send this get-parent)
-               move
-               'left)]
-        [(and (edit-mode)
-              (equal? (send event get-event-type)
-                      'right-down)
-              (send event get-control-down))
-         (send (send this get-parent)
-               move
-               'right)]
+         (let ([inner-edit-section-dialog
+                 (new edit-section-dialog%
+                      [parent #f]
+                      [edited-section (send this get-parent)]
+                      [label "Edit section"])])
+           (send inner-edit-section-dialog
+                 show
+                 #t))]
         [else #f]))
 
     (define/public
