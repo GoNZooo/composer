@@ -74,6 +74,8 @@
                                      [template template]
                                      [callback
                                        (lambda (button event)
+                                         (printf "callback to ~a~n"
+                                                 button)
                                          (send button
                                                copy-to-clipboard
                                                (send event
