@@ -102,7 +102,7 @@
          (begin
            (set! inner-edit-row-dialog
              (new edit-row-dialog%
-                  [parent this]
+                  [parent #f]
                   [label "Edit row"]
                   [edited-row this]))
            (send inner-edit-row-dialog
