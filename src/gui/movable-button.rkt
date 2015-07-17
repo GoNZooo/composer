@@ -71,14 +71,16 @@
                          "\n\n")]))
 
     (define/public
-      (copy-to-clipboard)
+      (copy-to-clipboard timestamp)
       
       (if clear
         (send the-clipboard
               set-clipboard-string
-              template)
+              template
+              timestamp)
         (let ([current-content (send the-clipboard
-                                     get-clipboard-string)])
+                                     get-clipboard-string
+                                     timestamp)])
           (string-append (ensure-newlines current-content)
                          template))))
 
