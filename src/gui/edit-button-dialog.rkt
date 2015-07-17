@@ -76,7 +76,7 @@
     (define clear-check-box
       (new check-box%
            [parent button-right-panel]
-           [label #f]
+           [label ""]
            [value (send edited-button
                         get-clear)]))
 
