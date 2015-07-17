@@ -41,6 +41,12 @@
       section-label)
 
     (define/public
+      (set-section-label label)
+
+      (set! section-label
+        label))
+
+    (define/public
       (serialize)
 
       (cons 'section
