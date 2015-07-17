@@ -21,7 +21,7 @@
 
   (define add-section-dialog
     (new add-section-dialog%
-         [parent this]
+         [parent top-frame]
          [label "Add section"]))
 
   (btn edit-mode-switch built-in-panel "Edit-mode"
