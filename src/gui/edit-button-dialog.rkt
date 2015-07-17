@@ -1,5 +1,7 @@
 #lang racket/gui
 
+(require "add-button-dialog.rkt")
+
 (provide edit-button-dialog%)
 (define edit-button-dialog%
   (class dialog%
