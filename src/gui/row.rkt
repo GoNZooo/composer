@@ -77,7 +77,7 @@
                                          (send button
                                                copy-to-clipboard
                                                (send event
-                                                     get-timestamp)))]
+                                                     get-time-stamp)))]
                                      [clear clear])
                                 inner-buttons))
       (set-children inner-buttons))
