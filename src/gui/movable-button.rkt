@@ -121,6 +121,14 @@
                 timestamp))))
 
     (define/public
+      (re-parent-button direction)
+      
+      (send (send this get-parent)
+            re-parent-button
+            this
+            direction))
+
+    (define/public
       (serialize)
 
       (if clear

@@ -132,6 +132,31 @@
                      move
                      'left))]))
 
+    (define button-section-move-vert-panel
+      (new vertical-panel%
+           [parent button-section-move-panel]
+           [alignment '(center top)]))
+
+    (define button-move-up-button
+      (new button%
+           [parent button-section-move-vert-panel]
+           [label "^"]
+           [callback
+             (lambda (button event)
+               (send edited-button
+                     re-parent-button
+                     'up))]))
+
+    (define button-move-down-button
+      (new button%
+           [parent button-section-move-vert-panel]
+           [label "v"]
+           [callback
+             (lambda (button event)
+               (send edited-button
+                     re-parent-button
+                     'down))]))
+
     (define button-move-right-button
       (new button%
            [parent button-section-move-panel]

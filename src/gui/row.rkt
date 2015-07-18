@@ -149,6 +149,23 @@
         [else #f]))
 
     (define/public
+      (re-parent-button button
+                        direction)
+      
+      (send (send this get-parent)
+            re-parent-button
+            button
+            direction))
+
+    (define/public
+      (re-parent-row direction)
+      
+      (send (send this get-parent)
+            re-parent-row
+            this
+            direction))
+
+    (define/public
       (serialize)
 
       (cons 'row

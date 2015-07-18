@@ -79,6 +79,44 @@
                 inner-rows))
       (set-children inner-rows))
 
+    (define (row-before row)
+      (define (row-eqv? r)
+        (eqv? row
+              r))
+
+      (match inner-rows
+        [(list before ... prev (? row-eqv? r) after ...)
+         prev]
+        [(list (? row-eqv? r) after ...)
+         r]))
+
+    (define (row-after row)
+      (define (row-eqv? r)
+        (eqv? row
+              r))
+
+      (match inner-rows
+        [(list before ... (? row-eqv? r))
+         r]
+        [(list before ... (? row-eqv? r) next after ...)
+         next]))
+
+    (define/public
+      (re-parent-button button
+                        direction)
+      
+      (case direction
+        [(up)
+         (send button
+               reparent
+               (row-before (send button
+                                 get-parent)))]
+        [(down)
+         (send button
+               reparent
+               (row-after (send button
+                                get-parent)))]))
+
     (define/public
       (serialize)
 
