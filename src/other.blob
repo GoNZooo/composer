@@ -1,5 +1,0 @@
-((row (label "Misc"))
- (row (button "Button 1" "content" clear) (button "Button 2" "other content"))
- (row (label "Other?"))
- (row (button "AAAAAAAAAAAAARGH" "murg"))
- (row (label "Och så var sagan slut...")))
