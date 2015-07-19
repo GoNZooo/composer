@@ -15,7 +15,10 @@
     (define/public
       (move direction)
 
-      (send (send this get-parent) move-child this direction))
+      (send (send this get-parent)
+            move-child
+            this
+            direction))
 
     (define inner-edit-button-dialog #f)
 
