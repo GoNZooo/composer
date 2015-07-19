@@ -11,13 +11,26 @@
 
 (define (main-window)
   (define top-frame (new auto-save-frame%
-                         [label "Invoker 1.0 [2015-07-XX]"]
+                         [label "Invoker 1.0 [2015-07-19]"]
                          [alignment '(center top)]
                          [style (window-style)]))
 
   (define built-in-panel (new horizontal-panel%
                               [parent top-frame]
                               [alignment '(center top)]))
+
+  (define edit-mode-notifier #f)
+  (define edit-mode-notifier-panel #f)
+
+  (define (notifier-switch)
+    (if (null? (send edit-mode-notifier-panel
+                     get-children))
+      (send edit-mode-notifier-panel
+            add-child
+            edit-mode-notifier)
+      (send edit-mode-notifier-panel
+            delete-child
+            edit-mode-notifier)))
 
   (define add-section-dialog
     (new add-section-dialog%
@@ -26,7 +39,8 @@
 
   (btn edit-mode-switch built-in-panel "Edit-mode"
        (lambda (button event)
-         (edit-mode (not (edit-mode)))))
+         (edit-mode (not (edit-mode)))
+         (notifier-switch)))
 
   (btn iconize-window built-in-panel "Iconize window"
        (lambda (button event)
@@ -42,6 +56,20 @@
   (btn add-button built-in-panel "Add section"
        (lambda (b e)
          (send add-section-dialog show #t)))
+
+  (set! edit-mode-notifier-panel
+    (new horizontal-panel%
+         [parent top-frame]
+         [alignment '(center top)]))
+
+  (set! edit-mode-notifier
+    (new message%
+         [parent edit-mode-notifier-panel]
+         [label "Edit mode is currently on"]
+         [style '(deleted)]
+         [font (make-object font%
+                            16
+                            'modern)]))
 
   (define template-content-panel (make-components (call-with-input-file
                                                     "components.blob"
