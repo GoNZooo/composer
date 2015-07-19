@@ -132,11 +132,7 @@
                             get-event-type)
                       'left-down)
               (equal? inner-buttons
-                      '())
-              (send event
-                    get-shift-down)
-              (send event
-                    get-control-down))
+                      '()))
          (begin
            (set! inner-edit-row-dialog
              (new edit-row-dialog%

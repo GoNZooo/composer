@@ -22,9 +22,7 @@
       (cond
         [(and (edit-mode)
               (equal? (send event get-event-type)
-                      'left-down)
-              (send event get-control-down)
-              (send event get-shift-down))
+                      'left-down))
          (let ([inner-edit-section-dialog
                  (new edit-section-dialog%
                       [parent #f]

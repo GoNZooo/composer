@@ -25,9 +25,7 @@
       (cond
         [(and (edit-mode)
               (equal? (send event get-event-type)
-                      'left-down)
-              (send event get-shift-down)
-              (send event get-control-down))
+                      'left-down))
          (begin
            (set! inner-edit-button-dialog
              (new edit-button-dialog%
@@ -39,14 +37,6 @@
                   [top-level-window (send this get-top-level-window)]))
            (send inner-edit-button-dialog
                  show #t))]
-        [(and (edit-mode)
-              (equal? (send event get-event-type)
-                      'left-down))
-         (move 'left)]
-        [(and (edit-mode)
-              (equal? (send event get-event-type)
-                      'right-down))
-         (move 'right)]
         [else #f]))
 
     (define/public
