@@ -118,6 +118,16 @@
                                 get-parent)))]))
 
     (define/public
+      (re-parent-row row
+                     section)
+      
+      (send (send this
+                  get-parent)
+            re-parent-row
+            row
+            section))
+
+    (define/public
       (serialize)
 
       (cons 'rows

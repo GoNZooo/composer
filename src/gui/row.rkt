@@ -142,7 +142,10 @@
              (new edit-row-dialog%
                   [parent #f]
                   [label "Edit row"]
-                  [edited-row this]))
+                  [edited-row this]
+                  [top-level-window (send this
+                                          get-top-level-window)]
+                  [sections (get-sections)]))
            (send inner-edit-row-dialog
                  show
                  #t))]

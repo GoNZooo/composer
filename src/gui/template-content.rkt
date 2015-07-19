@@ -84,6 +84,14 @@
                              section)))
                 inner-sections))
       (set-sections inner-sections))
+    
+    (define/public
+      (re-parent-row row
+                     section)
+
+      (send (find-section section)
+            put-row
+            row))
 
     (define/public
       (serialize)

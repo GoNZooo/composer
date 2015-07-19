@@ -65,4 +65,21 @@
       (add-row)
       
       (send inner-section-rows
-            add-row))))
+            add-row))
+
+    (define/public
+      (put-row row)
+      
+      (send row
+            reparent
+            inner-section-rows))
+    
+    (define/public
+      (re-parent-row row
+                     section)
+      
+      (send (send this
+                  get-parent)
+            re-parent-row
+            row
+            section))))
