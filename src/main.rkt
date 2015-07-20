@@ -11,7 +11,7 @@
 
 (define (main-window)
   (define top-frame (new auto-save-frame%
-                         [label "Invoker 1.0.1 [2015-07-20]"]
+                         [label "Invoker 1.0.0 [2015-07-20]"]
                          [alignment '(center top)]
                          [style (window-style)]))
 
@@ -67,7 +67,7 @@
          (send add-section-dialog show #t)))
 
   (set! edit-mode-notifier-panel
-    (new horizontal-panel%
+    (new vertical-panel%
          [parent top-frame]
          [alignment '(center top)]))
 
