@@ -66,7 +66,10 @@
     (define/public
       (set-name n)
       
-      (set! name n))
+      (set! name n)
+      (send this
+            set-label
+            name))
 
     (define/public
       (set-template t)
