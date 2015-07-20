@@ -11,7 +11,7 @@
 
 (define (main-window)
   (define top-frame (new auto-save-frame%
-                         [label "Invoker 1.0 [2015-07-19]"]
+                         [label "Invoker 1.0.1 [2015-07-20]"]
                          [alignment '(center top)]
                          [style (window-style)]))
 
@@ -20,6 +20,7 @@
                               [alignment '(center top)]))
 
   (define edit-mode-notifier #f)
+  (define edit-mode-notifier-extra #f)
   (define edit-mode-notifier-panel #f)
 
   (define (notifier-switch)
