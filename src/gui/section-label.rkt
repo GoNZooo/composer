@@ -10,11 +10,35 @@
 
     (init-field label)
 
-    (define label-message (new message%
-                               [parent this]
-                               [label label]))
+    (set! label
+      (new message%
+           [parent this]
+           [label label]
+           [font (make-object font%
+                              12
+                              'modern)]))
 
     (define inner-edit-section-dialog #f)
+
+    (define/public
+      (set-section-label new-label)
+
+      (send this
+            delete-child
+            label)
+      (set! label
+        (new message%
+             [parent this]
+             [label new-label]
+             [font (make-object font%
+                                12
+                                'modern)])))
+
+    (define/public
+      (get-section-label)
+      
+      (send label
+            get-label))
 
     (define/override
       (on-subwindow-event receiver event)
@@ -35,4 +59,5 @@
 
     (define/public
       (serialize)
-      (send label-message get-label))))
+
+      (send label get-label))))

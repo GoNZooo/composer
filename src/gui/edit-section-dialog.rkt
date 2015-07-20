@@ -56,7 +56,10 @@
            [callback
              (lambda (button event)
                (send edited-section
-                     add-row))]))
+                     add-row)
+               (send this
+                     show
+                     #f))]))
 
     (define section-move-panel
       (new horizontal-panel%

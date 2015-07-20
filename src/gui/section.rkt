@@ -13,10 +13,11 @@
     (init rows)
     (init-field section-label)
 
-    (define inner-section-label (new section-label%
-                                     [parent this]
-                                     [label section-label]
-                                     [alignment '(center top)]))
+    (set! section-label
+      (new section-label%
+           [parent this]
+           [label section-label]
+           [alignment '(center top)]))
 
     (define inner-section-rows (new section-rows%
                                     [parent this]
@@ -40,19 +41,21 @@
     (define/public
       (get-section-label)
 
-      section-label)
+      (send section-label
+            get-section-label))
 
     (define/public
-      (set-section-label label)
+      (set-section-label new-label)
 
-      (set! section-label
-        label))
+      (send section-label
+            set-section-label
+            new-label))
 
     (define/public
       (serialize)
 
       (cons 'section
-            (list (send inner-section-label serialize)
+            (list (send section-label serialize)
                   (send inner-section-rows serialize))))
 
     (define/public

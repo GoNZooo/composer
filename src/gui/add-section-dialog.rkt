@@ -19,7 +19,7 @@
                (send (send this get-parent)
                      add-section
                      (send name-field get-value)
-                     '((rows (row))))
+                     '((rows)))
                (send this
                      show
                      #f))]))))
