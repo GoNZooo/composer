@@ -133,7 +133,4 @@
       (pretty-write components output-port))
     #:exists 'replace))
 
-
-(module+ main
-  (define top-frame (main-window))
-  )
+(define top-frame (main-window))
