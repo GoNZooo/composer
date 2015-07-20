@@ -56,7 +56,10 @@
                (send (send edited-row
                            get-parent)
                      remove-row
-                     edited-row))]))
+                     edited-row)
+			   (send this
+					 show
+					 #f))]))
     
     (define add-button-button
       (new button%

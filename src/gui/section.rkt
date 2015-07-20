@@ -69,10 +69,10 @@
 
     (define/public
       (put-row row)
-      
-      (send row
-            reparent
-            inner-section-rows))
+
+      (send inner-section-rows
+            put-row
+            row))
     
     (define/public
       (re-parent-row row

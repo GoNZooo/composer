@@ -69,6 +69,21 @@
       
       (set-children inner-rows))
 
+	(define/public
+	  (put-row row)
+
+	  (define new-row
+		(new row%
+			 [parent this]
+			 [buttons
+			   (cdr (send row
+						  serialize))]
+			 [alignment '(center top)]))
+	  
+	  (set! inner-rows
+		(cons new-row
+			  inner-rows)))
+
     (define/public
       (remove-row row)
       
@@ -80,26 +95,31 @@
       (set-children inner-rows))
 
     (define (row-before row)
-      (define (row-eqv? r)
-        (eqv? row
-              r))
-
       (match inner-rows
-        [(list before ... prev (? row-eqv? r) after ...)
+        [(list before ... prev r after ...)
+		 #:when (eqv? row
+					  r)
          prev]
-        [(list (? row-eqv? r) after ...)
+        [(list r after ...)
+		 #:when (eqv? row
+					  r)
          r]))
 
     (define (row-after row)
-      (define (row-eqv? r)
-        (eqv? row
-              r))
-
       (match inner-rows
-        [(list before ... (? row-eqv? r))
+        [(list before ... r)
+		 #:when (eqv? row
+					  r)
          r]
-        [(list before ... (? row-eqv? r) next after ...)
-         next]))
+        [(list before ... r next after ...)
+		 #:when (eqv? row
+					  r)
+         next]
+        [(list before ... r next)
+		 #:when (eqv? row
+					  r)
+         next]
+		))
 
     (define/public
       (re-parent-button button
@@ -110,12 +130,14 @@
          (send button
                reparent
                (row-before (send button
-                                 get-parent)))]
+                                 get-parent)))
+		 button]
         [(down)
          (send button
                reparent
                (row-after (send button
-                                get-parent)))]))
+                                get-parent)))
+		 button]))
 
     (define/public
       (re-parent-row row

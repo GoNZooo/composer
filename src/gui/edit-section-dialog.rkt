@@ -44,7 +44,10 @@
                (send (send edited-section
                            get-parent)
                      remove-section
-                     edited-section))]))
+                     edited-section)
+			   (send this
+					 show
+					 #f))]))
 
     (define add-row-button
       (new button%

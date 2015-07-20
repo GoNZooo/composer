@@ -71,6 +71,11 @@
             set-label
             name))
 
+	(define/public
+	  (get-name)
+	  
+	  name)
+
     (define/public
       (set-template t)
       

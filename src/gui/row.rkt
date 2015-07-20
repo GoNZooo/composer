@@ -87,22 +87,26 @@
 
     (define/public
       (add-button name template clear)
+
+	  (define new-button
+		(new movable-button%
+			 [parent this]
+			 [label name]
+			 [name name]
+			 [template template]
+			 [callback
+			   (lambda (button event)
+				 (send button
+					   copy-to-clipboard
+					   (send event
+							 get-time-stamp)))]
+			 [clear clear]))
       
       (set! inner-buttons
-        (cons (new movable-button%
-                   [parent this]
-                   [label name]
-                   [name name]
-                   [template template]
-                   [callback
-                     (lambda (button event)
-                       (send button
-                             copy-to-clipboard
-                             (send event
-                                   get-time-stamp)))]
-                   [clear clear])
+        (cons new-button
               inner-buttons))
-      (set-children inner-buttons))
+      (set-children inner-buttons)
+	  new-button)
 
     (define/public
       (remove-button button)
@@ -146,6 +150,74 @@
                  show
                  #t))]
         [else #f]))
+
+	(define (replace-button button
+							name
+							template
+							clear
+							[buttons inner-buttons]
+							[replaced-button #f]
+							[new-buttons '()])
+	  (cond
+		[(null? buttons)
+		 (values replaced-button
+				 (reverse new-buttons))]
+		[(eqv? button
+			   (car buttons))
+		 (let ([new-button (new movable-button%
+								[parent this]
+								[label name]
+								[name name]
+								[template template]
+								[clear clear])])
+		   (replace-button button
+						   name
+						   template
+						   clear
+						   (cdr buttons)
+						   new-button
+						   (cons new-button
+								 new-buttons)))]
+
+		[else
+		  (let ([new-button (new movable-button%
+								 [parent this]
+								 [label (send (car buttons)
+											  get-label)]
+								 [name (send (car buttons)
+											 get-name)]
+								 [template (send (car buttons)
+												 get-template)]
+								 [clear (send (car buttons)
+											  get-clear)])])
+			(replace-button button
+							name
+							template
+							clear
+							(cdr buttons)
+							replaced-button
+							(cons new-button
+								  new-buttons)))]))
+
+	(define/public
+	  (recreate-button button
+					   name
+					   template
+					   clear)
+	  
+	  (define-values
+		(new-button new-buttons)
+		(replace-button button
+						name
+						template
+						clear))
+	  (send this
+			begin-container-sequence)
+	  (set! inner-buttons new-buttons)
+	  (set-children inner-buttons)
+	  (send this
+			end-container-sequence)
+	  new-button)
 
     (define/public
       (re-parent-button button
