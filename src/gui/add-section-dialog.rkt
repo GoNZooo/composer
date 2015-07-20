@@ -9,7 +9,7 @@
       (new text-field%
            [parent this]
            [label "Section name"]))
-    
+
     (define add-section-button
       (new button%
            [parent this]
@@ -19,6 +19,6 @@
                (send (send this get-parent)
                      add-section
                      (send name-field get-value)
-                     '((rows (row ())))))]))))
+                     '((rows (row)))))]))))
 
 

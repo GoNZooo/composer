@@ -33,7 +33,7 @@
 
     (define/public
       (get-sections)
-      
+
       (send (send this get-parent)
             get-sections))
 
@@ -57,13 +57,13 @@
 
     (define/public
       (add-button name template clear)
-      
+
       (send inner-section-rows
             add-button name template clear))
 
     (define/public
       (add-row)
-      
+
       (send inner-section-rows
             add-row))
 
@@ -73,11 +73,11 @@
       (send inner-section-rows
             put-row
             row))
-    
+
     (define/public
       (re-parent-row row
                      section)
-      
+
       (send (send this
                   get-parent)
             re-parent-row

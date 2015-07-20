@@ -6,32 +6,36 @@
 (define edit-button-dialog%
   (class dialog%
     (super-new)
-    
+
     (init sections
           top-level-window)
-	(init-field edited-button)
-          
+    (init-field edited-button)
+
 
     (define edited-row (send edited-button
                              get-parent))
 
-	(define/public
-	  (set-edited-button button)
-		(set! edited-button
-		  button))
+    (define/public
+      (set-edited-button button)
 
-	(define/public
-	  (get-edited-button)
-	  edited-button)
+      (set! edited-button
+        button))
 
-	(define/public
-	  (set-edited-row row)
-		(set! edited-row
-		  row))
+    (define/public
+      (get-edited-button)
 
-	(define/public
-	  (get-edited-row)
-	  edited-row)
+      edited-button)
+
+    (define/public
+      (set-edited-row row)
+
+      (set! edited-row
+        row))
+
+    (define/public
+      (get-edited-row)
+
+      edited-row)
 
     (define add-button-dialog #f)
 
@@ -44,7 +48,7 @@
       (new message%
            [parent main-vertical-panel]
            [label "Button settings"]))
-    
+
     (define button-vert-panel
       (new vertical-panel%
            [parent main-vertical-panel]
@@ -88,46 +92,46 @@
       (new horizontal-panel%
            [parent main-vertical-panel]
            [alignment '(center top)]))
-    
+
     (define edit-button-button
-	  (new button%
-		   [parent button-section-button-panel]
-		   [label "Edit"]
-		   [callback
-			 (lambda (button event)
-			   (if (equal? (send section-combo-field
-								 get-value)
-						   (send (get-edited-button) get-section))
-				 (send this
-					   set-edited-button 
-					   (send (send (get-edited-button)
-								   get-parent)
-							 recreate-button
-							 (get-edited-button)
-							 (send name-field
-								   get-value)
-							 (send template-field
-								   get-value)
-							 (send clear-check-box
-								   get-value)))
-				 (begin
-				   (send (send (get-edited-button)
-							   get-parent)
-						 remove-button
-						 (get-edited-button))
-				   (send this
-						 set-edited-button
-						 (send top-level-window
-							   add-button
-							   (send section-combo-field
-									 get-value)
-							   (send name-field
-									 get-value)
-							   (send template-field
-									 get-value)
-							   (send clear-check-box
-									 get-value))))))]))
-    
+      (new button%
+           [parent button-section-button-panel]
+           [label "Edit"]
+           [callback
+             (lambda (button event)
+               (if (equal? (send section-combo-field
+                                 get-value)
+                           (send (get-edited-button) get-section))
+                 (send this
+                       set-edited-button 
+                       (send (send (get-edited-button)
+                                   get-parent)
+                             recreate-button
+                             (get-edited-button)
+                             (send name-field
+                                   get-value)
+                             (send template-field
+                                   get-value)
+                             (send clear-check-box
+                                   get-value)))
+                 (begin
+                   (send (send (get-edited-button)
+                               get-parent)
+                         remove-button
+                         (get-edited-button))
+                   (send this
+                         set-edited-button
+                         (send top-level-window
+                               add-button
+                               (send section-combo-field
+                                     get-value)
+                               (send name-field
+                                     get-value)
+                               (send template-field
+                                     get-value)
+                               (send clear-check-box
+                                     get-value))))))]))
+
     (define remove-button-button
       (new button%
            [parent button-section-button-panel]
@@ -135,12 +139,12 @@
            [callback
              (lambda (button event)
                (send (send (get-edited-button)
-						   get-parent)
+                           get-parent)
                      remove-button
-					 (get-edited-button))
-			   (send this
-					 show
-					 #f))]))
+                     (get-edited-button))
+               (send this
+                     show
+                     #f))]))
 
     (define button-section-move-panel
       (new horizontal-panel%
@@ -169,10 +173,10 @@
            [callback
              (lambda (button event)
                (send this
-					 set-edited-button
-					 (send (get-edited-button)
-						   re-parent-button
-						   'up)))]))
+                     set-edited-button
+                     (send (get-edited-button)
+                           re-parent-button
+                           'up)))]))
 
     (define button-move-down-button
       (new button%
@@ -181,10 +185,10 @@
            [callback
              (lambda (button event)
                (send this
-					 set-edited-button
-					 (send (get-edited-button)
-						   re-parent-button
-						   'down)))]))
+                     set-edited-button
+                     (send (get-edited-button)
+                           re-parent-button
+                           'down)))]))
 
     (define button-move-right-button
       (new button%
@@ -195,7 +199,7 @@
                (send (get-edited-button)
                      move
                      'right))]))
-    
+
     (define row-message
       (new message%
            [parent main-vertical-panel]
@@ -218,27 +222,27 @@
            [label "Move to section"]
            [callback
              (lambda (button event)
-			   (send (send (get-edited-row)
-						   get-parent)
-					 delete-child
-					 (get-edited-row))
+               (send (send (get-edited-row)
+                           get-parent)
+                     delete-child
+                     (get-edited-row))
                (send this
-					 set-edited-row
-					 (send (send (get-edited-row)
-								 get-parent)
-						   re-parent-row
-						   (get-edited-row)
-						   (send row-section-combo-field
-								 get-value)))
-			   (send this
-					 show
-					 #f))]))
+                     set-edited-row
+                     (send (send (get-edited-row)
+                                 get-parent)
+                           re-parent-row
+                           (get-edited-row)
+                           (send row-section-combo-field
+                                 get-value)))
+               (send this
+                     show
+                     #f))]))
 
     (define row-section-button-panel
       (new horizontal-panel%
            [parent main-vertical-panel]
            [alignment '(center top)]))
-    
+
     (define remove-row-button
       (new button%
            [parent row-section-button-panel]
@@ -249,10 +253,10 @@
                            get-parent)
                      remove-row
                      (get-edited-row))
-			   (send this
-					 show
-					 #f))]))
-    
+               (send this
+                     show
+                     #f))]))
+
     (define add-button-button
       (new button%
            [parent row-section-button-panel]
@@ -292,5 +296,5 @@
                (send (get-edited-row)
                      move
                      'right))]))
-    
+
     ))

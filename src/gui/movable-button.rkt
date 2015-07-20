@@ -54,36 +54,36 @@
 
     (define/public
       (get-clear)
-      
+
       clear)
 
     (define/public
       (get-section)
-      
+
       (send (send this get-parent)
             get-section))
 
     (define/public
       (set-name n)
-      
+
       (set! name n)
       (send this
             set-label
             name))
 
-	(define/public
-	  (get-name)
-	  
-	  name)
+    (define/public
+      (get-name)
+
+      name)
 
     (define/public
       (set-template t)
-      
+
       (set! template t))
 
     (define/public
       (set-clear c)
-      
+
       (set! clear c))
 
     (define (ensure-newlines str)
@@ -106,7 +106,7 @@
 
     (define/public
       (copy-to-clipboard timestamp)
-      
+
       (if clear
         (send the-clipboard
               set-clipboard-string
@@ -123,7 +123,7 @@
 
     (define/public
       (re-parent-button direction)
-      
+
       (send (send this get-parent)
             re-parent-button
             this

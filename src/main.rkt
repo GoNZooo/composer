@@ -11,7 +11,7 @@
 
 (define (main-window)
   (define top-frame (new auto-save-frame%
-                         [label "Invoker 1.0.0 [2015-07-20]"]
+                         [label "Invoker 1.0.2 [2015-07-21]"]
                          [alignment '(center top)]
                          [style (window-style)]))
 
@@ -77,7 +77,7 @@
          [label "Edit mode is currently on"]
          [style '(deleted)]
          [font (make-object font%
-                            14
+                            12
                             'modern)]))
 
   (set! edit-mode-notifier-extra
@@ -86,7 +86,7 @@
          [label "(click on component to edit)"]
          [style '(deleted)]
          [font (make-object font%
-                            14
+                            11
                             'modern)]))
 
   (define template-content-panel (make-components (call-with-input-file

@@ -22,7 +22,7 @@
            sections))
 
     (set! inner-sections (init-sections sections))
-    
+
     (define (set-sections cs)
       (set! inner-sections cs)
       (send this
@@ -32,7 +32,7 @@
 
     (define/public
       (get-sections)
-      
+
       inner-sections)
 
     (define/public
@@ -53,38 +53,38 @@
 
     (define/public
       (add-button section name template clear)
-      
+
       (send (find-section section)
             add-button name template clear))
 
     (define/public
       (add-row section)
-      
+
       (send (find-section section)
             add-row))
 
     (define/public
       (add-section name rows)
-      
+
       (set! inner-sections
         (cons (new section%
                    [parent this]
                    [section-label name]
                    [rows rows])
               inner-sections))
-      
+
       (set-sections inner-sections))
 
     (define/public
       (remove-section section)
-      
+
       (set! inner-sections
         (filter (lambda (s)
                   (not (eqv? s
                              section)))
                 inner-sections))
       (set-sections inner-sections))
-    
+
     (define/public
       (re-parent-row row
                      section)

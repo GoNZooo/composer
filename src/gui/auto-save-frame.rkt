@@ -8,7 +8,7 @@
              (lambda ()
                #f)]
            [template-content-panel #f])
-    
+
     (define/public
       (set-auto-save-callback callback)
 
@@ -21,31 +21,31 @@
 
     (define/public
       (set-template-content-panel panel)
-      
+
       (set! template-content-panel panel))
 
     (define/public
       (get-template-content-panel)
-      
+
       template-content-panel)
 
     (define/public
       (add-button section name template clear)
-      
+
       (send template-content-panel
             add-button
             section name template clear))
 
     (define/public
       (add-row section)
-      
+
       (send template-content-panel
             add-row
             section))
 
     (define/public
       (add-section name rows)
-      
+
       (send template-content-panel
             add-section
             name
@@ -53,7 +53,7 @@
 
     (define/public
       (remove-section section)
-      
+
       (send template-content-panel
             remove-section
             section))

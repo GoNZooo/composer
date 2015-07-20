@@ -39,26 +39,26 @@
 
     (define/public
       (get-sections)
-      
+
       (send (send this get-parent)
             get-sections))
 
     (define/public
       (get-section)
-      
+
       (send (send this get-parent)
             get-section-label))
 
     (define/public
       (add-button name template clear)
-      
+
       (send (car inner-rows)
             add-button
             name template clear))
 
     (define/public
       (add-row)
-      
+
       (set! inner-rows
         (cons (new row%
                    [parent this]
@@ -66,27 +66,27 @@
                    [min-height 25]
                    [alignment '(center top)])
               inner-rows))
-      
+
       (set-children inner-rows))
 
-	(define/public
-	  (put-row row)
+    (define/public
+      (put-row row)
 
-	  (define new-row
-		(new row%
-			 [parent this]
-			 [buttons
-			   (cdr (send row
-						  serialize))]
-			 [alignment '(center top)]))
-	  
-	  (set! inner-rows
-		(cons new-row
-			  inner-rows)))
+      (define new-row
+        (new row%
+             [parent this]
+             [buttons
+               (cdr (send row
+                          serialize))]
+             [alignment '(center top)]))
+
+      (set! inner-rows
+        (cons new-row
+              inner-rows)))
 
     (define/public
       (remove-row row)
-      
+
       (set! inner-rows
         (filter (lambda (r)
                   (not (eqv? row
@@ -97,29 +97,29 @@
     (define (row-before row)
       (match inner-rows
         [(list before ... prev r after ...)
-		 #:when (eqv? row
-					  r)
+         #:when (eqv? row
+                      r)
          prev]
         [(list r after ...)
-		 #:when (eqv? row
-					  r)
+         #:when (eqv? row
+                      r)
          r]))
 
     (define (row-after row)
       (match inner-rows
         [(list before ... r)
-		 #:when (eqv? row
-					  r)
+         #:when (eqv? row
+                      r)
          r]
         [(list before ... r next after ...)
-		 #:when (eqv? row
-					  r)
+         #:when (eqv? row
+                      r)
          next]
         [(list before ... r next)
-		 #:when (eqv? row
-					  r)
+         #:when (eqv? row
+                      r)
          next]
-		))
+        ))
 
     (define/public
       (re-parent-button button
@@ -131,18 +131,18 @@
                reparent
                (row-before (send button
                                  get-parent)))
-		 button]
+         button]
         [(down)
          (send button
                reparent
                (row-after (send button
                                 get-parent)))
-		 button]))
+         button]))
 
     (define/public
       (re-parent-row row
                      section)
-      
+
       (send (send this
                   get-parent)
             re-parent-row

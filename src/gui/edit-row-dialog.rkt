@@ -17,7 +17,7 @@
       (new vertical-panel%
            [parent this]
            [alignment '(center top)]))
-    
+
     (define row-section-combo-field
       (new combo-field%
            [parent main-vertical-panel]
@@ -46,7 +46,7 @@
       (new horizontal-panel%
            [parent main-vertical-panel]
            [alignment '(center top)]))
-    
+
     (define remove-row-button
       (new button%
            [parent button-panel]
@@ -57,10 +57,10 @@
                            get-parent)
                      remove-row
                      edited-row)
-			   (send this
-					 show
-					 #f))]))
-    
+               (send this
+                     show
+                     #f))]))
+
     (define add-button-button
       (new button%
            [parent button-panel]
@@ -75,7 +75,7 @@
                (send add-button-dialog
                      show
                      #t))]))
-    
+
     (define row-section-move-panel
       (new horizontal-panel%
            [parent main-vertical-panel]

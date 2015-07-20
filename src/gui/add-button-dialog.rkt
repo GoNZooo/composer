@@ -16,7 +16,7 @@
       (new message%
            [parent main-vertical-panel]
            [label "Button settings"]))
-    
+
     (define button-vert-panel
       (new vertical-panel%
            [parent main-vertical-panel]
@@ -43,7 +43,7 @@
       (new horizontal-panel%
            [parent main-vertical-panel]
            [alignment '(center top)]))
-    
+
     (define add-button
       (new button%
            [parent this]

@@ -45,9 +45,9 @@
                            get-parent)
                      remove-section
                      edited-section)
-			   (send this
-					 show
-					 #f))]))
+               (send this
+                     show
+                     #f))]))
 
     (define add-row-button
       (new button%
@@ -57,7 +57,7 @@
              (lambda (button event)
                (send edited-section
                      add-row))]))
-    
+
     (define section-move-panel
       (new horizontal-panel%
            [parent main-vertical-panel]

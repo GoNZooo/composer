@@ -16,7 +16,7 @@
                            (send s get-section-label))
                          sections)]
            [label "Section"]))
-    
+
     (define add-row-button
       (new button%
            [parent this]
