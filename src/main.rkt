@@ -25,12 +25,20 @@
   (define (notifier-switch)
     (if (null? (send edit-mode-notifier-panel
                      get-children))
-      (send edit-mode-notifier-panel
-            add-child
-            edit-mode-notifier)
-      (send edit-mode-notifier-panel
-            delete-child
-            edit-mode-notifier)))
+      (begin
+        (send edit-mode-notifier-panel
+              add-child
+              edit-mode-notifier)
+        (send edit-mode-notifier-panel
+              add-child
+              edit-mode-notifier-extra))
+      (begin
+        (send edit-mode-notifier-panel
+              delete-child
+              edit-mode-notifier)
+        (send edit-mode-notifier-panel
+              delete-child
+              edit-mode-notifier-extra))))
 
   (define add-section-dialog
     (new add-section-dialog%
@@ -44,7 +52,7 @@
 
   (btn iconize-window built-in-panel "Iconize window"
        (lambda (button event)
-         (send built-in-panel iconize #t)))
+         (send top-frame iconize #t)))
 
   (btn clear-clipboard built-in-panel "Clear clipboard"
        (lambda (button event)
@@ -68,7 +76,16 @@
          [label "Edit mode is currently on"]
          [style '(deleted)]
          [font (make-object font%
-                            16
+                            14
+                            'modern)]))
+
+  (set! edit-mode-notifier-extra
+    (new message%
+         [parent edit-mode-notifier-panel]
+         [label "(click on component to edit)"]
+         [style '(deleted)]
+         [font (make-object font%
+                            14
                             'modern)]))
 
   (define template-content-panel (make-components (call-with-input-file
