@@ -47,7 +47,10 @@
     (define button-message
       (new message%
            [parent main-vertical-panel]
-           [label "Button settings"]))
+           [label "Button settings"]
+           [font (make-object font%
+                              13
+                              'modern)]))
 
     (define button-vert-panel
       (new vertical-panel%
@@ -96,7 +99,7 @@
     (define edit-button-button
       (new button%
            [parent button-section-button-panel]
-           [label "Edit"]
+           [label "Save button settings"]
            [callback
              (lambda (button event)
                (if (equal? (send section-combo-field
@@ -135,7 +138,7 @@
     (define remove-button-button
       (new button%
            [parent button-section-button-panel]
-           [label "Remove"]
+           [label "Remove button"]
            [callback
              (lambda (button event)
                (send (send (get-edited-button)
@@ -203,7 +206,10 @@
     (define row-message
       (new message%
            [parent main-vertical-panel]
-           [label "Row settings"]))
+           [label "Row settings"]
+           [font (make-object font%
+                              13
+                              'modern)]))
 
     (define row-section-combo-field
       (new combo-field%
@@ -211,7 +217,7 @@
            [choices (map (lambda (s)
                            (send s get-section-label))
                          sections)]
-           [label "Section"]
+           [label "Section for row"]
            [style '(vertical-label)]
            [init-value (send (get-edited-row)
                              get-section)]))
@@ -219,7 +225,7 @@
     (define edit-section-button
       (new button%
            [parent main-vertical-panel]
-           [label "Move to section"]
+           [label "Save row settings"]
            [callback
              (lambda (button event)
                (send (send (get-edited-row)
@@ -246,7 +252,7 @@
     (define remove-row-button
       (new button%
            [parent row-section-button-panel]
-           [label "Remove"]
+           [label "Remove row"]
            [callback
              (lambda (button event)
                (send (send (get-edited-row)
@@ -260,7 +266,7 @@
     (define add-button-button
       (new button%
            [parent row-section-button-panel]
-           [label "Add button"]
+           [label "Add button to row"]
            [callback
              (lambda (button event)
                (set! add-button-dialog

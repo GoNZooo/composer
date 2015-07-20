@@ -18,30 +18,6 @@
            [parent this]
            [alignment '(center top)]))
 
-    (define row-section-combo-field
-      (new combo-field%
-           [parent main-vertical-panel]
-           [choices (map (lambda (s)
-                           (send s get-section-label))
-                         sections)]
-           [label "Section"]
-           [style '(vertical-label)]
-           [init-value (send edited-row
-                             get-section)]))
-
-    (define edit-section-button
-      (new button%
-           [parent main-vertical-panel]
-           [label "Move to section"]
-           [callback
-             (lambda (button event)
-               (send (send edited-row
-                           get-parent)
-                     re-parent-row
-                     edited-row
-                     (send row-section-combo-field
-                           get-value)))]))
-
     (define button-panel
       (new horizontal-panel%
            [parent main-vertical-panel]
@@ -50,7 +26,7 @@
     (define remove-row-button
       (new button%
            [parent button-panel]
-           [label "Remove"]
+           [label "Remove row"]
            [callback
              (lambda (button event)
                (send (send edited-row
@@ -70,7 +46,7 @@
                (set! add-button-dialog
                  (new add-button-dialog%
                       [parent this]
-                      [label "Add button"]
+                      [label "Add button to row"]
                       [parent-row edited-row]))
                (send add-button-dialog
                      show

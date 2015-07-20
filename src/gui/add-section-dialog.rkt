@@ -19,6 +19,9 @@
                (send (send this get-parent)
                      add-section
                      (send name-field get-value)
-                     '((rows (row)))))]))))
+                     '((rows (row))))
+               (send this
+                     show
+                     #f))]))))
 
 

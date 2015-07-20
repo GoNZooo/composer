@@ -50,8 +50,11 @@
            [label "Add"]
            [callback
              (lambda (button event)
-               (send parent-row
-                     add-button
-                     (send name-field get-value)
-                     (send template-field get-value)
-                     (send clear-check-box get-value)))]))))
+               (let ([added-button (send parent-row
+                                         add-button
+                                         (send name-field get-value)
+                                         (send template-field get-value)
+                                         (send clear-check-box get-value))])
+                 (send this
+                       show
+                       #f)))]))))
