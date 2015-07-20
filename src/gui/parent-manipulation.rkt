@@ -39,6 +39,8 @@
     (comp item i))
 
   (match lst
+	['()
+	 (list i)]
     [(list (? found-item? found))
      (list found)]
     [(list (? found-item? found)
@@ -64,6 +66,8 @@
     (equal? item i))
 
   (match lst
+	['()
+	 (list i)]
     [(list (? found-item? found))
      (list found)]
     [(list (? found-item? found)

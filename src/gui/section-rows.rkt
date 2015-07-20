@@ -104,7 +104,7 @@
     (define/public
       (re-parent-button button
                         direction)
-      
+
       (case direction
         [(up)
          (send button
