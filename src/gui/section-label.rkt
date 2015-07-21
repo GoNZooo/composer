@@ -15,7 +15,7 @@
            [parent this]
            [label label]
            [font (make-object font%
-                              12
+                              10
                               'modern)]))
 
     (define inner-edit-section-dialog #f)
@@ -31,7 +31,7 @@
              [parent this]
              [label new-label]
              [font (make-object font%
-                                12
+                                10
                                 'modern)])))
 
     (define/public
