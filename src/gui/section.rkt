@@ -10,8 +10,8 @@
   (class vertical-panel%
     (super-new)
 
-    (init rows)
-    (init-field section-label)
+    (init-field section-label
+                rows)
 
     (set! section-label
       (new section-label%
@@ -19,11 +19,12 @@
            [label section-label]
            [alignment '(center top)]))
 
-    (define inner-section-rows (new section-rows%
-                                    [parent this]
-                                    [rows (cdar rows)]
-                                    [spacing 0]
-                                    [alignment '(center top)]))
+    (set! rows
+      (new section-rows%
+           [parent this]
+           [rows (cdar rows)]
+           [spacing 0]
+           [alignment '(center top)]))
 
     (define/public
       (move direction)
@@ -55,25 +56,30 @@
       (serialize)
 
       (cons 'section
-            (list (send section-label serialize)
-                  (send inner-section-rows serialize))))
+            (list (send section-label
+                        serialize)
+                  (send rows
+                        serialize))))
 
     (define/public
       (add-button name template clear)
 
-      (send inner-section-rows
-            add-button name template clear))
+      (send rows
+            add-button
+            name
+            template
+            clear))
 
     (define/public
       (add-row)
 
-      (send inner-section-rows
+      (send rows
             add-row))
 
     (define/public
       (put-row row)
 
-      (send inner-section-rows
+      (send rows
             put-row
             row))
 
