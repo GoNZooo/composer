@@ -1,6 +1,7 @@
 #lang racket/gui
 
-(require "add-button-dialog.rkt")
+(require "add-button-dialog.rkt"
+         "parent-manipulation.rkt")
 
 (provide edit-button-dialog%)
 (define edit-button-dialog%

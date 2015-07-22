@@ -1,7 +1,8 @@
 #lang racket/gui
 
 (require "../parameters.rkt"
-         "edit-section-dialog.rkt")
+         "edit-section-dialog.rkt"
+         "parent-manipulation.rkt")
 
 (provide section-label%)
 (define section-label%
