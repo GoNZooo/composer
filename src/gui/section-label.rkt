@@ -23,9 +23,8 @@
     (define/public
       (set-section-label new-label)
 
-      (send this
-            delete-child
-            label)
+      (child- this
+              label)
       (set! label
         (new message%
              [parent this]

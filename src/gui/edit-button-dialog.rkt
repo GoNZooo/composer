@@ -228,10 +228,9 @@
            [label "Save row settings"]
            [callback
              (lambda (button event)
-               (send (send (get-edited-row)
+               (child- (send (get-edited-row)
                            get-parent)
-                     delete-child
-                     (get-edited-row))
+                       (get-edited-row))
                (send this
                      set-edited-row
                      (send (send (get-edited-row)

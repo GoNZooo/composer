@@ -7,7 +7,8 @@
          "parameters.rkt"
          "loader.rkt"
          "gui/auto-save-frame.rkt"
-         "gui/add-section-dialog.rkt")
+         "gui/add-section-dialog.rkt"
+         "gui/parent-manipulation.rkt")
 
 (define (main-window)
   (define top-frame (new auto-save-frame%
@@ -26,20 +27,16 @@
   (define (notifier-switch)
     (if (null? (send edit-mode-notifier-panel
                      get-children))
+      (begin 
+        (child+ edit-mode-notifier-panel
+                edit-mode-notifier)
+        (child+ edit-mode-notifier-panel
+                edit-mode-notifier-extra))
       (begin
-        (send edit-mode-notifier-panel
-              add-child
-              edit-mode-notifier)
-        (send edit-mode-notifier-panel
-              add-child
-              edit-mode-notifier-extra))
-      (begin
-        (send edit-mode-notifier-panel
-              delete-child
-              edit-mode-notifier)
-        (send edit-mode-notifier-panel
-              delete-child
-              edit-mode-notifier-extra))))
+        (child- edit-mode-notifier-panel
+                edit-mode-notifier)
+        (child- edit-mode-notifier-panel
+                edit-mode-notifier-extra))))
 
   (define add-section-dialog
     (new add-section-dialog%

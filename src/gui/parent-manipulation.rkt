@@ -19,6 +19,18 @@
         (lambda (c)
           children)))
 
+(provide child+)
+(define (child+ parent child)
+  (send parent
+        add-child
+        child))
+
+(provide child-)
+(define (child- parent child)
+  (send parent
+        delete-child
+        child))
+
 (provide move-left-in-container)
 (define (move-left-in-container e
                                 #:compare [comp eqv?])
