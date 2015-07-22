@@ -10,7 +10,7 @@
   (class horizontal-panel%
     (super-new)
 
-    (init buttons)
+    (init-field buttons)
 
     (define inner-edit-row-dialog #f)
 
@@ -54,22 +54,23 @@
       (map make-button
            bs))
 
-    (define inner-buttons (make-buttons buttons))
+    (set! buttons
+      (make-buttons buttons))
 
     (define/public
       (move-child child direction)
 
-      (set! inner-buttons
+      (set! buttons
         (case direction
           [(left)
            (move-left child
-                      inner-buttons)]
+                      buttons)]
           [(right)
            (move-right child
-                       inner-buttons)]
+                       buttons)]
           [else
             #f]))
-      (set-children inner-buttons))
+      (set-children buttons))
 
     (define/public
       (get-sections)
@@ -102,21 +103,21 @@
                              get-time-stamp)))]
              [clear clear]))
 
-      (set! inner-buttons
+      (set! buttons
         (cons new-button
-              inner-buttons))
-      (set-children inner-buttons)
+              buttons))
+      (set-children buttons)
       new-button)
 
     (define/public
       (remove-button button)
 
-      (set! inner-buttons
+      (set! buttons
         (filter (lambda (b)
                   (not (eqv? b
                              button)))
-                inner-buttons))
-      (set-children inner-buttons))
+                buttons))
+      (set-children buttons))
 
     (define/public
       (move direction)
@@ -135,7 +136,7 @@
               (equal? (send event
                             get-event-type)
                       'left-down)
-              (equal? inner-buttons
+              (equal? buttons
                       '()))
          (begin
            (set! inner-edit-row-dialog
@@ -155,7 +156,7 @@
                             name
                             template
                             clear
-                            [buttons inner-buttons]
+                            [buttons buttons]
                             [replaced-button #f]
                             [new-buttons '()])
       (cond
@@ -213,17 +214,22 @@
                         clear))
       (send this
             begin-container-sequence)
-      (set! inner-buttons new-buttons)
-      (set-children inner-buttons)
+
+      (set! buttons
+        new-buttons)
+      (set-children buttons)
+
       (send this
             end-container-sequence)
+
       new-button)
 
     (define/public
       (re-parent-button button
                         direction)
 
-      (send (send this get-parent)
+      (send (send this
+                  get-parent)
             re-parent-button
             button
             direction))
@@ -231,7 +237,8 @@
     (define/public
       (re-parent-row direction)
 
-      (send (send this get-parent)
+      (send (send this
+                  get-parent)
             re-parent-row
             this
             direction))
