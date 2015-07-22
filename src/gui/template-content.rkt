@@ -4,16 +4,14 @@
          "parent-manipulation.rkt"
          "section.rkt")
 
-(require racket/pretty)
 (provide template-content%)
 (define template-content%
   (class vertical-panel%
     (super-new)
 
-    (init sections)
-    (field [inner-sections '()])
+    (init-field sections)
 
-    (define (init-sections sections)
+    (define (init-sections)
       (map (lambda (s)
              (new section%
                   [parent this]
@@ -21,41 +19,49 @@
                   [rows (cddr s)]))
            sections))
 
-    (set! inner-sections (init-sections sections))
+    (set! sections (init-sections))
 
     (define (set-sections cs)
-      (set! inner-sections cs)
+      (set! sections cs)
       (send this
             change-children
             (lambda (children)
-              inner-sections)))
+              sections)))
 
     (define/public
       (get-sections)
 
-      inner-sections)
+      sections)
 
     (define/public
-      (move-child child direction)
+      (move-child child
+                  direction)
 
-      (set! inner-sections
+      (set! sections
         (case direction
-          [(left) (move-left child inner-sections)]
-          [(right) (move-right child inner-sections)]
+          [(left) (move-left child
+                             sections)]
+          [(right) (move-right child
+                               sections)]
           [else #f]))
-      (set-sections inner-sections))
+      (set-sections sections))
 
-    (define (find-section name [sections inner-sections])
-      (for/or ([section sections])
+    (define (find-section name [secs sections])
+      (for/or ([section secs])
         (if (equal? name (send section get-section-label))
           section
           #f)))
 
     (define/public
-      (add-button section name template clear)
+      (add-button section
+                  name
+                  template
+                  clear)
 
       (send (find-section section)
-            add-button name template clear))
+            add-button name
+            template
+            clear))
 
     (define/public
       (add-row section)
@@ -64,26 +70,27 @@
             add-row))
 
     (define/public
-      (add-section name rows)
+      (add-section name
+                   rows)
 
-      (set! inner-sections
+      (set! sections
         (cons (new section%
                    [parent this]
                    [section-label name]
                    [rows rows])
-              inner-sections))
+              sections))
 
-      (set-sections inner-sections))
+      (set-sections sections))
 
     (define/public
       (remove-section section)
 
-      (set! inner-sections
+      (set! sections
         (filter (lambda (s)
                   (not (eqv? s
                              section)))
-                inner-sections))
-      (set-sections inner-sections))
+                sections))
+      (set-sections sections))
 
     (define/public
       (re-parent-row row
@@ -98,4 +105,4 @@
 
       (cons 'templates (map (lambda (section)
                               (send section serialize))
-                            inner-sections)))))
+                            sections)))))
