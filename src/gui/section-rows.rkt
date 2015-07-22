@@ -9,7 +9,7 @@
   (class vertical-panel%
     (super-new)
 
-    (init rows)
+    (init-field rows)
 
     (define (make-rows rows)
       (map (lambda (r)
@@ -20,7 +20,7 @@
                   [alignment '(center top)]))
            rows))
 
-    (define inner-rows (make-rows rows))
+    (set! rows (make-rows rows))
 
     (define (set-children cs)
       (send this
@@ -31,43 +31,54 @@
     (define/public
       (move-child child direction)
 
-      (set! inner-rows (case direction
-                         [(left) (move-left child (send this get-children))]
-                         [(right) (move-right child (send this get-children))]
-                         [else #f]))
-      (set-children inner-rows))
+      (set! rows
+        (case direction
+                   [(left) (move-left child
+                                      (send this
+                                            get-children))]
+                   [(right) (move-right child
+                                        (send this
+                                              get-children))]
+                   [else #f]))
+      (set-children rows))
 
     (define/public
       (get-sections)
 
-      (send (send this get-parent)
+      (send (send this
+                  get-parent)
             get-sections))
 
     (define/public
       (get-section)
 
-      (send (send this get-parent)
+      (send (send this
+                  get-parent)
             get-section-label))
 
     (define/public
-      (add-button name template clear)
+      (add-button name
+                  template
+                  clear)
 
-      (send (car inner-rows)
+      (send (car rows)
             add-button
-            name template clear))
+            name
+            template
+            clear))
 
     (define/public
       (add-row)
 
-      (set! inner-rows
+      (set! rows
         (cons (new row%
                    [parent this]
                    [buttons '()]
                    [min-height 25]
                    [alignment '(center top)])
-              inner-rows))
+              rows))
 
-      (set-children inner-rows))
+      (set-children rows))
 
     (define/public
       (put-row row)
@@ -80,22 +91,22 @@
                           serialize))]
              [alignment '(center top)]))
 
-      (set! inner-rows
+      (set! rows
         (cons new-row
-              inner-rows)))
+              rows)))
 
     (define/public
       (remove-row row)
 
-      (set! inner-rows
+      (set! rows
         (filter (lambda (r)
                   (not (eqv? row
                              r)))
-                inner-rows))
-      (set-children inner-rows))
+                rows))
+      (set-children rows))
 
     (define (row-before row)
-      (match inner-rows
+      (match rows
         [(list before ... prev r after ...)
          #:when (eqv? row
                       r)
@@ -106,7 +117,7 @@
          r]))
 
     (define (row-after row)
-      (match inner-rows
+      (match rows
         [(list before ... r)
          #:when (eqv? row
                       r)
