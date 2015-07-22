@@ -100,6 +100,7 @@
   (define (save-components [filename "components.blob"])
     (write-components-to-file (components) 
                               filename))
+
   (send top-frame set-auto-save-callback save-components)
 
   (define (print-components [frame top-frame])
@@ -107,19 +108,6 @@
 
   (send top-frame show #t)
   top-frame)
-
-(define (view-children object)
-  (define (children-of o)
-    (with-handlers
-      ([exn:fail:object?
-         (lambda (exn)
-           #f)])
-      (send o get-children)))
-
-  (define children (children-of object))
-  (if children
-    (cons object (map view-children children))
-    object))
 
 (define (serialize-object object)
   (send object serialize))
