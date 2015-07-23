@@ -89,7 +89,8 @@
            [parent main-vertical-panel]
            [label "Template"]
            [style '(multiple)]
-           [init-value ""]))
+           [init-value ""]
+           [min-width 400]))
     (send template-field
           set-value
           (send (get-edited-button)
