@@ -13,3 +13,4 @@
 
 ### v1.0.3 - 23.07.2015
 - Fixed re-naming of buttons so that it doesn't actually re-create every button in row
+- Fixed size of edit-button-dialog being maxed and non-resizable; is now smaller and re-sizable
