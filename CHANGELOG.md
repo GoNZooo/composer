@@ -10,3 +10,6 @@
 - Polish: Made button names more descriptive so as to be clearer about intent
 - Polish: Use auto-close more liberally when saving changes to components
 - Polish: Added font for section labels 
+
+### v1.0.3 - 23.07.2015
+- Fixed re-naming of buttons so that it doesn't actually re-create every button in row
