@@ -106,18 +106,14 @@
                (if (equal? (send section-combo-field
                                  get-value)
                            (send (get-edited-button) get-section))
-                 (send this
-                       set-edited-button 
-                       (send (send (get-edited-button)
-                                   get-parent)
-                             recreate-button
-                             (get-edited-button)
-                             (send name-field
-                                   get-value)
-                             (send template-field
-                                   get-value)
-                             (send clear-check-box
-                                   get-value)))
+                 (send (get-edited-button)
+                       set-button-values
+                       (send name-field
+                             get-value)
+                       (send template-field
+                             get-value)
+                       (send clear-check-box
+                             get-value))
                  (begin
                    (send (send (get-edited-button)
                                get-parent)
