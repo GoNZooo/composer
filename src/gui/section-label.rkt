@@ -36,7 +36,7 @@
                                 12
                                 'modern
                                 'normal
-                                'bold))])))
+                                'bold)])))
 
     (define/public
       (get-section-label)
