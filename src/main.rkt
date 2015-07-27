@@ -12,7 +12,7 @@
 
 (define (main-window)
   (define top-frame (new auto-save-frame%
-                         [label "Invoker 1.0.2 [2015-07-21]"]
+                         [label "Invoker"]
                          [alignment '(center top)]
                          [style (window-style)]))
 
