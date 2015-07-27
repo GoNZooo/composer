@@ -136,19 +136,29 @@
       (re-parent-button button
                         direction)
 
+      (define old-parent (send button
+                               get-parent))
+      (define new-parent #f)
+      
       (case direction
         [(up)
-         (send button
-               reparent
-               (row-before (send button
-                                 get-parent)))
-         button]
+         (set! new-parent
+           (row-before old-parent))]
         [(down)
-         (send button
-               reparent
-               (row-after (send button
-                                get-parent)))
-         button]))
+         (set! new-parent
+           (row-after old-parent))])
+
+      (send button
+            reparent
+            new-parent)
+      (send new-parent
+            add-reparented-button
+            button)
+      (send old-parent
+            remove-reparented-button
+            button)
+
+      button)
 
     (define/public
       (re-parent-row row

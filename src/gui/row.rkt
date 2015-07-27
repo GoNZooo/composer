@@ -110,6 +110,22 @@
       new-button)
 
     (define/public
+      (add-reparented-button new-button)
+      
+      (set! buttons
+        (cons new-button
+              buttons)))
+
+    (define/public
+      (remove-reparented-button old-button)
+      
+      (set! buttons
+        (filter (lambda (b)
+                  (not (eqv? b
+                             old-button)))
+                buttons)))
+
+    (define/public
       (remove-button button)
 
       (set! buttons
