@@ -17,7 +17,16 @@
            [parent main-vertical-panel]
            [label "Section name:"]
            [init-value (send edited-section
-                             get-section-label)]))
+                             get-section-label)]
+           [callback
+             (lambda (text-field event)
+               (when (equal? (send event
+                                   get-event-type)
+                             'text-field-enter)
+                 (send edited-section
+                       set-section-label
+                       (send name-field
+                             get-value))))]))
 
     (define button-panel
       (new horizontal-panel%
