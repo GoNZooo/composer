@@ -14,3 +14,9 @@
 ### v1.0.3 - 23.07.2015
 - Fixed re-naming of buttons so that it doesn't actually re-create every button in row
 - Fixed size of edit-button-dialog being maxed and non-resizable; is now smaller and re-sizable
+
+### v1.0.4 - 27.07.2015
+- Fixed problem with re-parenting not being properly reflected in rows' button lists
+- Polish: Added callback for pressing enter in most text-fields to do corresponding actions (modify, add)
+  An exception to this is the template-field, as it is for multiple lines and enter does nothing there
+- Polish: Bolded section labels

@@ -17,7 +17,9 @@
            [label label]
            [font (make-object font%
                               12
-                              'modern)]))
+                              'modern
+                              'normal
+                              'bold)]))
 
     (define inner-edit-section-dialog #f)
 
@@ -32,7 +34,9 @@
              [label new-label]
              [font (make-object font%
                                 12
-                                'modern)])))
+                                'modern
+                                'normal
+                                'bold))])))
 
     (define/public
       (get-section-label)
