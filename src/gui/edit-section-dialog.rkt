@@ -26,7 +26,10 @@
                  (send edited-section
                        set-section-label
                        (send name-field
-                             get-value))))]))
+                             get-value))
+                 (send this
+                       show
+                       #f)))]))
 
     (define button-panel
       (new horizontal-panel%
@@ -42,7 +45,10 @@
                (send edited-section
                      set-section-label
                      (send name-field
-                           get-value)))]))
+                           get-value))
+               (send this
+                     show
+                     #f))]))
 
     (define remove-section-button
       (new button%
