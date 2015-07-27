@@ -18,5 +18,5 @@
 ### v1.0.4 - 27.07.2015
 - Fixed problem with re-parenting not being properly reflected in rows' button lists
 - Polish: Added callback for pressing enter in most text-fields to do corresponding actions (modify, add)
-  An exception to this is the template-field, as it is for multiple lines and enter does nothing there
+  An exception to this is the template-field, as it is for multiple lines and enter should be for linebreaks
 - Polish: Bolded section labels
