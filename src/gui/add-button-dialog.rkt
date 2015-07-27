@@ -26,7 +26,19 @@
       (new text-field%
            [parent main-vertical-panel]
            [label "Name"]
-           [style '(single vertical-label)]))
+           [style '(single vertical-label)]
+           [callback (lambda (text-field event)
+                       (when (equal? (send event
+                                           get-event-type)
+                                     'text-field-enter)
+                         (send parent-row
+                               add-button
+                               (send name-field get-value)
+                               (send template-field get-value)
+                               (send clear-check-box get-value))
+                         (send this
+                               show
+                               #f)))]))
 
     (define clear-check-box
       (new check-box%
@@ -50,11 +62,11 @@
            [label "Add"]
            [callback
              (lambda (button event)
-               (let ([added-button (send parent-row
-                                         add-button
-                                         (send name-field get-value)
-                                         (send template-field get-value)
-                                         (send clear-check-box get-value))])
-                 (send this
-                       show
-                       #f)))]))))
+               (send parent-row
+                     add-button
+                     (send name-field get-value)
+                     (send template-field get-value)
+                     (send clear-check-box get-value))
+               (send this
+                     show
+                     #f))]))))
