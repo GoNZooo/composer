@@ -96,6 +96,16 @@
               rows)))
 
     (define/public
+      (remove-reparented-row reparented-row)
+      
+      (set! rows
+        (filter (lambda (r)
+                  (not (eqv? r
+                             reparented-row)))
+                rows))
+      (set-children rows))
+
+    (define/public
       (remove-row row)
 
       (set! rows

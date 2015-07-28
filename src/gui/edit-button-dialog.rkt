@@ -232,6 +232,10 @@
                (child- (send (get-edited-row)
                            get-parent)
                        (get-edited-row))
+               (send (send (get-edited-row)
+                           get-parent)
+                     remove-reparented-row
+                     (get-edited-row))
                (send this
                      set-edited-row
                      (send (send (get-edited-row)
