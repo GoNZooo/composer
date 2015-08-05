@@ -12,8 +12,8 @@
 (define (make-components blob-components top-frame)
 
   (match blob-components
-    [(list 'templates sections ...)
+    [(list 'templates tabs ...)
      (new template-content%
           [parent top-frame]
-          [sections sections]
+          [tabs tabs]
           [alignment '(center top)])]))

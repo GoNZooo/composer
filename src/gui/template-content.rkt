@@ -2,107 +2,89 @@
 
 (require "../parameters.rkt"
          "parent-manipulation.rkt"
-         "section.rkt")
+         "tab.rkt")
 
 (provide template-content%)
 (define template-content%
-  (class vertical-panel%
-    (super-new)
+  (class tab-panel%
+    (super-new [choices '()])
 
-    (init-field sections)
+    (init-field tabs)
+    (field [active-tab #f])
 
-    (define (init-sections)
+    (define (init-tabs)
       (map (lambda (s)
-             (new section%
+             (new tab%
                   [parent this]
-                  [section-label (cadr s)]
-                  [rows (cddr s)]))
-           sections))
+                  [tab-label (cadr s)]
+                  [sections (cddr s)]))
+           tabs))
 
-    (set! sections (init-sections))
+    (set! tabs
+      (init-tabs))
+    (set! active-tab (car tabs))
 
-    (define (set-sections cs)
-      (set! sections cs)
+    (define (set-tabs ts)
+      (set! tabs ts)
       (send this
             change-children
             (lambda (children)
-              sections)))
+              tabs)))
 
     (define/public
-      (get-sections)
+      (get-tabs)
 
-      sections)
-
-    (define/public
-      (move-child child
-                  direction)
-
-      (set! sections
-        (case direction
-          [(left) (move-left child
-                             sections)]
-          [(right) (move-right child
-                               sections)]
-          [else #f]))
-      (set-sections sections))
-
-    (define (find-section name [secs sections])
-      (for/or ([section secs])
-        (if (equal? name (send section get-section-label))
-          section
-          #f)))
+      tabs)
 
     (define/public
-      (add-button section
-                  name
-                  template
-                  clear)
+      (set-tab-label tab
+                     new-label)
 
-      (send (find-section section)
-            add-button name
-            template
-            clear))
+      (printf "Rename-message: ~a ~a ~n"
+              tab new-label)
 
-    (define/public
-      (add-row section)
+      (define (rename-tab [ts tabs] [n 0])
+        (cond
+          [(null? ts)
+           #f]
+          [(eqv? (car ts)
+                 tab)
+           (send this
+                 set-item-label
+                 n
+                 new-label)]
+          [else
+            (rename-tab (cdr ts)
+                        (add1 n))]))
 
-      (send (find-section section)
-            add-row))
-
-    (define/public
-      (add-section name
-                   rows)
-
-      (set! sections
-        (cons (new section%
-                   [parent this]
-                   [section-label name]
-                   [rows rows])
-              sections))
-
-      (set-sections sections))
+      (rename-tab))
 
     (define/public
-      (remove-section section)
-
-      (set! sections
-        (filter (lambda (s)
-                  (not (eqv? s
-                             section)))
-                sections))
-      (set-sections sections))
+      (get-active-tab)
+      
+      active-tab)
 
     (define/public
-      (re-parent-row row
-                     section)
+      (set-active-tab n)
 
-      (send (find-section section)
-            put-row
-            row))
+      (when (not (equal? (get-active-tab)
+                         #f))
+        (send this
+              delete-child
+              (get-active-tab)))
+      (send this
+            add-child
+            (list-ref tabs
+                      n))
+      (set! active-tab
+        (list-ref tabs
+                  n)))
 
     (define/public
       (serialize)
 
-      (cons 'templates (map (lambda (section)
-                              (send section serialize))
-                            sections)))))
+      (cons 'templates
+            (map (lambda (tab)
+                   (send tab
+                         serialize))
+                 tabs)))))
